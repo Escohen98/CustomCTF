@@ -4,7 +4,9 @@ import socket
 import os
 
 def checkCreds(user, password): #checks if credentials are valid and sends result to client
-    if (user == 'spy' and password == 'pwnd'):
+    if not user or not password: #Ensure server doesn't crash on forced exit
+        return(True)
+    elif (user == 'spy' and password == 'pwnd'):
         c.sendall('It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'.encode('utf-8'))
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
         return(True)
@@ -14,6 +16,8 @@ def checkCreds(user, password): #checks if credentials are valid and sends resul
         return(False)
     
 def checkFlag(flag):
+    if not flag: #Ensure server doesn't crash on forced exit
+        return(True)
     if (flag == 'CTF{rendezvous_at_red_square}'):
         c.sendall('You win!'.encode('utf-8'))
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean

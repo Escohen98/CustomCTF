@@ -12,6 +12,9 @@ success = False;
 s.sendall('flag'.encode('utf-8')) 
 while not success: #Loops through until successful login
     flag = input("Flag: ")
+    if not flag:
+        print("Please enter a value: ")
+        continue
     s.sendall(flag.encode('utf-8'))
 
     rec1 = s.recv(1024).decode()
