@@ -7,6 +7,8 @@ def download(s):
     bits = s.recv(1024) 
     while bits: #Importing File
         print('Receiving...')
+        if not bits:
+            break
         f.write(bits)
         bits = s.recv(1024)
     f.close()
