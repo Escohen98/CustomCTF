@@ -16,11 +16,7 @@ while not success: #Loops through until successful login
     s.sendall(user.encode('utf-8'))
     s.sendall(password.encode('utf-8'))
     
-    response = int(s.recv(1024).decode())
-    if (response == 1): 
-        print('It looks like the Spy has encrypted the message.')
-        print('PGS{eraqrmibhf_ng_erq_fdhner}') #Flag - Encrypted in rot-13
-        success = True;
-    else:
-        print("Invalid username or password")
+    print(s.recv(1024).decode()) #Flag - Encrypted in rot-13
+    success = (s.recv(1024).decode() == 1)
+    
 s.close()

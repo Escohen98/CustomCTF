@@ -5,15 +5,20 @@ import os
 
 def checkCreds(user, password): #checks if credentials are valid and sends result to client
     if (user == 'spy' and password == 'pwnd'):
-        c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
+        c.sendall('1'.encode('utf-8'))
+        c.sendall('You win!'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
         return(True)
     c.sendall('0'.encode('utf-8'))
+    c.sendall('Incorrect.'.encode('utf-8'))
     return(False)
     
 def checkFlag(flag):
     if (flag == 'CTF{rendezvous_at_red_square}'):
-        c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
+        msg = 'It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'
+        c.sendall('msg'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
+        c.sendall('1'.encode('utf-8'))
         return(True)
+    c.sendall('Invalid username or password')
     c.sendall('0'.encode('utf-8'))
     return(False)
 

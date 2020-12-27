@@ -16,8 +16,8 @@ while not success: #Loops through until successful login
 
     response = int(s.recv(1024).decode())
     if (response == 1): 
-        print('You win!')
+        print(s.recv(1024).decode())
         success = True;
     else:
-        print("Incorrect.")
+        print(s.recv(1024).decode())
 s.close()
