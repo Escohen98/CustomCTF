@@ -17,6 +17,7 @@ connected = False; #Checks if client is connected to server
 while not connected: #Loops until connected to server
     try: #Attempting Connection
         s = socket.socket()
+        s.settimeout(5.0)
         host = socket.gethostname()
         port = int(input('Enter port: '))
         s.connect((host, port))
@@ -30,3 +31,5 @@ while not connected: #Loops until connected to server
 #print(s.recv(1024).decode())
 
 s.close()
+
+#cd Documents\Python\CustomCTF\client
