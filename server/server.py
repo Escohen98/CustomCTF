@@ -8,17 +8,20 @@ def checkCreds(user, password): #checks if credentials are valid and sends resul
         c.sendall('It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'.encode('utf-8'))
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
         return(True)
-    else:
+    else: #Not necessary but I'm not risking it breaking again.
         c.sendall('Invalid username or password.'.encode('utf-8'))
         c.sendall('0'.encode('utf-8'))
         return(False)
     
 def checkFlag(flag):
-    if (flag == 'CTF{rendezvous_at_red_square}' or flag == 'debug'):
+    if (flag == 'CTF{rendezvous_at_red_square}'):
+        c.sendall('You win!'.encode('utf-8'))
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
         return(True)
-    c.sendall('0'.encode('utf-8'))
-    return(False)
+    else: 
+        c.sendall('Incorrect.'.encode('utf-8'))
+        c.sendall('0'.encode('utf-8'))
+        return(False)
 
 s = socket.socket() #Socket object
 host = socket.gethostname() #Local Machine

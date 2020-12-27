@@ -9,15 +9,15 @@ port = 12345
 s.connect((host,port))
 
 success = False;
+s.sendall('flag'.encode('utf-8')) 
 while not success: #Loops through until successful login
-    s.sendall('flag'.encode('utf-8')) 
     flag = input("Flag: ")
     s.sendall(flag.encode('utf-8'))
 
-    response = int(s.recv(1024).decode())
-    if (response == 1): 
-        print('You win!')
-        success = True;
-    else:
-        print("Incorrect.")
+    rec1 = s.recv(1024).decode()
+    rec2 = s.recv(1024).decode()
+    
+    #print(rec2)
+    print(rec1)
+    success = (int(rec2) == 1)
 s.close()
