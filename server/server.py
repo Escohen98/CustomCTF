@@ -20,8 +20,10 @@ def checkFlag(flag):
         c.send('You win!'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean #Because I am too lazy to figure out how to send a boolean
         c.send('1'.encode('utf-8'))
         return(True)
-    c.send('Incorrect.'.encode())
-    c.send('0'.encode())
+    msg = 'Incorrect.0'
+    #code = '0'
+    c.send(msg.encode('utf-8'))
+    #c.send(code.encode('utf-8'))
     return(False)
 
 s = socket.socket() #Socket object

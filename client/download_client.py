@@ -14,13 +14,16 @@ def download(s):
     f.close()
 
 connected = False; #Checks if client is connected to server
+flag = False;
 while not connected: #Loops until connected to server
     try: #Attempting Connection
         s = socket.socket()
         host = socket.gethostname()
         port = int(input('Enter port: '))
         s.connect((host, port))
-        s.sendall('send'.encode('utf-8'))
+        if (not flag)
+            s.sendall('send'.encode('utf-8'))
+            flag = True
         f = open('torecv.png', 'wb') #Opening File Buffer
         download(s)
         connected = True
