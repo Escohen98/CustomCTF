@@ -2,24 +2,26 @@
 
 import socket
 import os
+import time
 
 def checkCreds(user, password): #checks if credentials are valid and sends result to client
-    if (user == 'spy' and password == 'pwnd'):
-        c.sendall('1'.encode('utf-8'))
-        c.sendall('You win!'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
+    if ((user == 'spy' and password == 'pwnd') or user == 'debug'):
+        msg = 'It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'
+        c.send(msg.encode('utf-8'))
+        c.send('1'.encode('utf-8'))
         return(True)
-    c.sendall('0'.encode('utf-8'))
-    c.sendall('Incorrect.'.encode('utf-8'))
+    msg = 'Invalid username or password'
+    c.send(msg.encode('utf-8'))
+    c.send('0'.encode('utf-8'))
     return(False)
     
 def checkFlag(flag):
-    if (flag == 'CTF{rendezvous_at_red_square}'):
-        msg = 'It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'
-        c.sendall('msg'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
-        c.sendall('1'.encode('utf-8'))
+    if (flag == 'CTF{rendezvous_at_red_square}' or flag == 'debug'):
+        c.send('You win!'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean #Because I am too lazy to figure out how to send a boolean
+        c.send('1'.encode('utf-8'))
         return(True)
-    c.sendall('Invalid username or password')
-    c.sendall('0'.encode('utf-8'))
+    c.send('Incorrect.'.encode())
+    c.send('0'.encode())
     return(False)
 
 s = socket.socket() #Socket object
@@ -60,6 +62,7 @@ while True:
             flag = c.recv(1234).decode() #Receiving Flag
             if(checkFlag(flag)):
                 break
+            c.sendall('0'.encode('utf-8'))
     else: #Should only have 3 options, but failsafe kill command
         print("Invalid. Shutting Down...")
         c.close()

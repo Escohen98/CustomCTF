@@ -13,11 +13,14 @@ while not success: #Loops through until successful login
     s.sendall('flag'.encode('utf-8')) 
     flag = input("Flag: ")
     s.sendall(flag.encode('utf-8'))
+    msg1 = s.recv(1024).decode()
+    msg2 = s.recv(1024).decode()
+    print(msg1)
+    print(msg2)
+    msg1 = ''
+    msg2 = ''
+    #response = (msg2) == 1)
 
-    response = int(s.recv(1024).decode())
-    if (response == 1): 
-        print(s.recv(1024).decode())
-        success = True;
-    else:
-        print(s.recv(1024).decode())
 s.close()
+
+#cd Documents\Python\CustomCTF\client

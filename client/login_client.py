@@ -17,6 +17,6 @@ while not success: #Loops through until successful login
     s.sendall(password.encode('utf-8'))
     
     print(s.recv(1024).decode()) #Flag - Encrypted in rot-13
-    success = (s.recv(1024).decode() == 1)
+    success = (int(s.recv(1024).decode() == 1)
     
 s.close()
