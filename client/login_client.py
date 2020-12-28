@@ -4,6 +4,7 @@ import socket
 
 #Connect to server
 s = socket.socket()
+s.settimeout(5.0)
 host = socket.gethostname()
 port = 12345
 s.connect((host,port))
@@ -14,7 +15,7 @@ while not success: #Loops through until successful login
     
     user = input("Username: ")
     password = input("Password: ")
-    if not user or not password:
+    if not user or not password: #Fail-Safe
         print("Please enter a username and password.")
         continue
     s.sendall(user.encode('utf-8'))
