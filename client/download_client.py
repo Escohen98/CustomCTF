@@ -22,7 +22,7 @@ while not connected: #Loops until connected to server
         port = int(input('Enter port: '))
         s.connect((host, port))
         s.sendall('send'.encode('utf-8'))
-        f = open('torecv.png', 'wb') #Opening File Buffer
+        f = open('torecv.pcap', 'wb') #Opening File Buffer
         download(s)
         connected = True
     except Exception as err: #If fail to connect, notify user

@@ -37,7 +37,7 @@ def multi_threaded_client(c):
             print(os.getcwd())
             #THIS_FOLDER = os.path.dirname(os.path.abspath(__file__)) #Cross-Platform compatibility
             #my_file = os.path.join(THIS_FOLDER, 'tosend.png') 
-            file = open('tosend.png', 'rb') #Testing with png. Replace with pcap
+            file = open('tosend.pcap', 'rb') #Testing with png. Replace with pcap
             print('Sending File...')
             bits = file.read(1024)
             while bits: #Sends over file in pieces
