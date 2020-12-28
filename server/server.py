@@ -1,9 +1,13 @@
 #!./server.py
+#If you're here, that means you know something 
+#that hasn't been taught yet
+#Congratulations!! Here's your special code: h4v3_4_c00k13
 
 import socket
 import os
 import threading
 
+putting here to enable easter egg push
 s = socket.socket() #Socket object
 def checkCreds(c,user, password): #checks if credentials are valid and sends result to client
     if not user or not password: #Ensure server doesn't crash on forced exit
