@@ -9,15 +9,11 @@ def checkCreds(c,user, password): #checks if credentials are valid and sends res
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
     elif (user == 'spy' and password == 'pwnd'):
-        print('here')
         c.sendall('It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'.encode('utf-8'))
-        print('here')
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
-        print('there')
         c.sendall('Invalid username or password.'.encode('utf-8'))
-        print('there')
         c.sendall('0'.encode('utf-8'))
         return(False)
     
