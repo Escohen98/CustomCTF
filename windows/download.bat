@@ -1,0 +1,1 @@
+python3 ../client/download_client.txt

@@ -1,0 +1,1 @@
+python3 ../client/flag_client.py
