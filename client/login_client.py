@@ -1,13 +1,11 @@
 import socket
+from connection import connection
 
 #Login Client
 
 #Connect to server
-s = socket.socket()
-s.settimeout(5.0)
-host = socket.gethostname()
-port = 12345
-s.connect((host,port))
+conn = connection()
+s = conn.connect(12345)
 
 success = False;
 s.sendall('login'.encode('utf-8')) 
@@ -29,6 +27,6 @@ while not success: #Loops through until successful login
     success = (int(rec2) == 1)
     
  
-s.close()
+conn.disconnect(s)
 
 #cd Documents\Python\CustomCTF\client

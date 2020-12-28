@@ -16,11 +16,9 @@ def download(s):
 connected = False; #Checks if client is connected to server
 while not connected: #Loops until connected to server
     try: #Attempting Connection
-        s = socket.socket()
-        s.settimeout(5.0)
-        host = socket.gethostname()
+        conn = connection()
         port = int(input('Enter port: '))
-        s.connect((host, port))
+        s = conn.connect(port)
         s.sendall('send'.encode('utf-8'))
         f = open('torecv.pcap', 'wb') #Opening File Buffer
         download(s)
@@ -30,6 +28,6 @@ while not connected: #Loops until connected to server
         time.sleep(1)
 #print(s.recv(1024).decode())
 
-s.close()
+conn.disconnect(s)
 
 #cd Documents\Python\CustomCTF\client

@@ -1,13 +1,11 @@
 import socket
+from connection import connection
 
 #Flag Client
 
 #Connect to server
-s = socket.socket()
-s.settimeout(5.0)
-host = socket.gethostname()
-port = 12345
-s.connect((host,port))
+conn = connection()
+s = conn.connect(12345)
 
 success = False;
 s.sendall('flag'.encode('utf-8')) 
@@ -24,4 +22,4 @@ while not success: #Loops through until successful login
     #print(rec2)
     print(rec1)
     success = (int(rec2) == 1)
-s.close()
+conn.disconnect(s)
