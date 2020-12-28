@@ -30,6 +30,10 @@ def home():
     label.pack()
     start.pack(pady=100)
 
+#Must enter port before moving to menu screen
+def portScreen():
+    print("Coming Soon")
+
 #Menu Screen    
 def menu():
     var = StringVar()
@@ -45,7 +49,16 @@ def menu():
     fB.pack(pady=10)
     
 def downloadScreen():
-    print('Coming Soon')
+    if(port == 0): #Change to isConnected
+        var = StringVar()
+        label = Label(window, textvariable=var, font=128, padx=10, width=10)
+        var.set("Port not found!")
+        back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
+        
+        label.pack(pady=(100,0))
+        back.pack(pady=(100,0))
+    else:
+        print('Coming Soon')
     
 def loginScreen():
     if(port == 0): #Change to isConnected
