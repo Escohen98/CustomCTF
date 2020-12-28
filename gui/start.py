@@ -4,17 +4,25 @@ import time
 window = Tk() #Open window
 window.title('Capture the Flag')
 window.geometry("300x300")
+
+port = 0
+
+def setPort(port):
+    port = port
+
+def getPort():
+    return port
+    
 #To hide buttons
 def hide(events, screen):
     for event in events:
-        print(type(event))
         event.destroy()
     show(screen)
 
 #home screen
 def home():
     var = StringVar()
-    label = Label(window, textvariable=var, relief=RAISED, height=3, font=64)
+    label = Label(window, textvariable=var, height=3, font=64)
     start = Button(window, text = "Start", font=32, padx = 10, command=lambda: hide([start, label], 'menu'))
     #start['command'] = hide([start, label])
 
@@ -25,11 +33,11 @@ def home():
 #Menu Screen    
 def menu():
     var = StringVar()
-    label = Label(window, textvariable=var, relief=RAISED, height=3, font=64)
+    label = Label(window, textvariable=var, height=3, font=64)
     var.set("Pick your challenge!")
     dB = Button(window, text = "Download", font=32, padx=10, width=10, command = lambda: hide([label, dB, lB, fB],'download'))
     lB = Button(window, text = "Login", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'login'))
-    fB = Button(window, text = "Flag", font=32, padx=10, width=10, command=lambda: hide([label, db, lb, fb],'flag'))
+    fB = Button(window, text = "Flag", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'flag'))
   
     label.pack()
     dB.pack(pady=(50,10))
@@ -40,13 +48,32 @@ def downloadScreen():
     print('Coming Soon')
     
 def loginScreen():
-    print('Coming Soon')
+    if(port == 0): #Change to isConnected
+        var = StringVar()
+        label = Label(window, textvariable=var, font=128, padx=10, width=10)
+        var.set("Port not found!")
+        back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
+        
+        label.pack(pady=(100,0))
+        back.pack(pady=(100,0))
+    else:
+        print('Coming Soon')
 
 def flagScreen():
-    print('Coming Soon')
+    if(port == 0): #Change to isConnected
+        var = StringVar()
+        label = Label(window, textvariable=var, font=128, padx=10, width=10)
+        var.set("Port not found!")
+        back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
+        
+        label.pack(pady=(100,0))
+        back.pack(pady=(100,0))
+    else:
+        print('Coming Soon')
 
 #Shows the given screen
 def show(screen):
+    print("Screen: ", screen)
     if (screen == 'home'):
         home()
     elif (screen == 'menu'):
@@ -55,7 +82,7 @@ def show(screen):
         downloadScreen()
     elif (screen == 'login'):
         loginScreen()
-    elif (screen == flag):
+    elif (screen == 'flag'):
         flagScreen()
 
 
