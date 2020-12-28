@@ -7,7 +7,6 @@ import socket
 import os
 import threading
 
-putting here to enable easter egg push
 s = socket.socket() #Socket object
 def checkCreds(c,user, password): #checks if credentials are valid and sends result to client
     if not user or not password: #Ensure server doesn't crash on forced exit
