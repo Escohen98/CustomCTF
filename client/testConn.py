@@ -4,12 +4,11 @@ from connection import connection
 class testConnection():
     
     #Tests if connection works and returns result
-    @staticmethod
-    def test(port):
+    def test(self, port):
         conn = connection()
-        conn.connect(self, port)
+        server = conn.connect(port)
         
         connected = conn.isConnected()
-        conn.disconnect()
+        conn.disconnect(server)
         
         return(connected)
