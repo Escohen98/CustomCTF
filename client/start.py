@@ -1,5 +1,6 @@
 from tkinter import * 
 from testConn import testConnection
+from connection import connection
 from download_client import downloader
 
 window = Tk() #Open window
@@ -87,19 +88,27 @@ def menu():
     
 def downloadScreen():
     print(getPort())
-    portCheck = checkPort(getPort())
-    if(portCheck): #Change to isConnected
+    if(checkPort(getPort())): #Change to isConnected
         var = StringVar()
         label = Label(window, textvariable=var, height=3, font=64)
-        download = Button(window, text = "Download", font=32, padx = 10, pady = 10, command=lambda: hide([download, label], 'menu'))
+        download = Button(window, text = "Download", font=32, padx = 10, pady = 10, command=lambda: downloadHandler((download, label)))
         var.set("Click to download the pcap file")
         label.pack()
         download.pack(pady=100)
     else:
         portNotFound()
     
-def toDownload():
-    downloader().download()
+#Downloads file then changes events on screen    
+def downloadHandler(events):
+    conn = connection()
+    server = conn.connect(getPort())
+    downloader().download(server)
+    conn.disconnect(server)
+    events[0]['text'] = "Back"
+    events[0]['command'] = lambda: hide([events[0], events[1]], 'menu')
+    newVar = StringVar()
+    events[1]['textvariable'] = newVar
+    newVar.set("Done.")
     
 def loginScreen():
     if(checkPort(getPort())): #Change to isConnected

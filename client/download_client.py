@@ -4,6 +4,8 @@ import time
 class downloader():
     #Download Client
     def download(self, s):
+        s.sendall('send'.encode('utf-8'))
+        f = open('torecv.pcap', 'wb')
         print('\nReceiving...')
         bits = s.recv(1024) 
         while bits: #Importing File
