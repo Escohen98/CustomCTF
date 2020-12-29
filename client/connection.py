@@ -11,7 +11,7 @@ class connection():
         server.settimeout(5.0)
         host = socket.gethostname() #Might not be a bad idea to put into a config file
         server.connect((host,port))
-        connection.conn = True
+        self.conn = True
         return(s)
             
     def disconnect(self, server):

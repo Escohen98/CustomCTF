@@ -18,7 +18,7 @@ def getPort():
     
 #Checks if port is valid 
 def checkPort(port):
-    if(connTest.testConnection(port)): 
+    if(connTest.test(self, port)): 
         setPort(port)
         return(True)
     return(False)
@@ -43,7 +43,7 @@ def hide(events, screen):
 def home():
     var = StringVar()
     label = Label(window, textvariable=var, height=3, font=64)
-    start = Button(window, text = "Start", font=32, padx = 10, command=lambda: hide([start, label], 'menu'))
+    start = Button(window, text = "Start", font=32, padx = 10, command=lambda: hide([start, label], 'portScreen'))
     #start['command'] = hide([start, label])
 
     var.set("Welcome to the CTF!")
@@ -52,13 +52,13 @@ def home():
 
 #Must enter port before moving to menu screen
 def portScreen():
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: checkPort())
     lP = Label(window, text="Port:")
     eP = Entry(window, bd = 2)
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: checkPort())
     
+    submit.pack(side = BOTTOM, pady=(20,20))
     lP.pack(side = LEFT, padx=(75,0))
     eP.pack(side = RIGHT, padx=(0,75))
-    submit.pack(pady=(20,20))
     #print("Coming Soon")
 
 #Menu Screen    
@@ -113,7 +113,6 @@ def show(screen):
         loginScreen()
     elif (screen == 'flag'):
         flagScreen()
-
 
 show('home')
 #bottomframe = Frame(root)

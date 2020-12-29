@@ -1,10 +1,11 @@
 import socket
 from connection import connection
 
-class testConnection() {
+class testConnection():
     
     #Tests if connection works and returns result
-    def test(self, port) {
+    @staticmethod
+    def test(port):
         conn = connection()
         conn.connect(self, port)
         
@@ -12,6 +13,3 @@ class testConnection() {
         conn.disconnect()
         
         return(connected)
-    }
-
-}
