@@ -2,24 +2,30 @@ import socket
 from connection import connection
 
 #Flag Client
+class flagCheck:
 
-#Connect to server
-conn = connection()
-s = conn.connect(12345)
+    #success = False;
+    #while not success: #Loops through until successful login
+    def check(self, flag, s): 
+        #Connect to server
+        s.sendall('flag'.encode('utf-8')) 
+        #flag = input("Flag: ")
+        if not flag:
+            print("Please enter a value: ")
+            return ["Please enter a value",0]
+        elif(type(flag) == type(1)): #Stops injections / timeout
+            str(flag)
+        s.sendall(flag.encode('utf-8'))
 
-success = False;
-s.sendall('flag'.encode('utf-8')) 
-while not success: #Loops through until successful login
-    flag = input("Flag: ")
-    if not flag:
-        print("Please enter a value: ")
-        continue
-    s.sendall(flag.encode('utf-8'))
-
-    rec1 = s.recv(1024).decode()
-    rec2 = s.recv(1024).decode()
-    
-    #print(rec2)
-    print(rec1)
-    success = (int(rec2) == 1)
-conn.disconnect(s)
+        #Need to resolve socket timeout issue.
+        try:
+            rec1 = s.recv(1024).decode('utf-8') #Response
+            rec2 = s.recv(1024).decode('utf-8') #Response Code [Deprecated]
+        except socket.timeout:
+            rec1 = 'Server Timed out. Please try again.'
+            rec2 = '0'
+        
+        #print(rec2)
+        print(rec1)
+        #success = (int(rec2) == 1)
+        return [rec1, rec2]

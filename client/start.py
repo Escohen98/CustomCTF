@@ -2,6 +2,8 @@ from tkinter import *
 from testConn import testConnection
 from connection import connection
 from download_client import downloader
+from login_client import login
+from flag_client import flagCheck
 
 window = Tk() #Open window
 window.title('Capture the Flag')
@@ -71,7 +73,7 @@ def home():
 
 #Must enter port before moving to menu screen
 def portScreen():
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenTransition(int(eP.get()),[lP, eP, submit]))
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(int(eP.get()),[lP, eP, submit]))
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
     
@@ -81,7 +83,7 @@ def portScreen():
     #print("Coming Soon")
 
 #Too many middleman functions ... but be an easier way.
-def portScreenTransition(port, entries):
+def portScreenHandler(port, entries):
     if(checkPort(port)):
         setPort(port)
         print(PORT)
@@ -140,7 +142,7 @@ def downloadHandler(events):
     
 def loginScreen():
     if(checkPort(getPort())): #Change to isConnected
-        login = Button(window, text = "Login", font=32, padx = 10)#, command=lambda: portScreenTransition(int(eP.get()),[lUser, eUser, lPass, ePass, login, back]))
+        login = Button(window, text = "Login", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), [lUser, eUser, lPass, ePass, login, back]))
         back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back], 'menu'))
         lUser = Label(window, text="Username:")
         eUser = Entry(window, bd = 2)
@@ -158,13 +160,40 @@ def loginScreen():
     else:
         portNotFound()
 
+def loginHandler(user, password, entries):
+    log = login()
+
+
 def flagScreen():
-    if(checkPort(getPort())): #Change to isConnected
-        print("Coming Soon")
+    if(1==1 or checkPort(getPort())): #Change to isConnected
+        result = Label(window, font=128) #Result Text
+        submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: flagHandler(eFlag.get(),result))
+        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lFlag, eFlag, submit, back, result], 'menu'))
+        lFlag = Label(window, text="Flag: ")
+        eFlag = Entry(window, bd = 2)
+        
+        submit.grid(column=1, row=1, padx=(0,50), pady=(20,20))
+        back.grid(column=0, row=1, padx=(50,0), pady=(20,20))
+        lFlag.grid(column=0, row=0, padx=(75,0), pady=(75,0))
+        eFlag.grid(column=1, row=0, padx=(0,75), pady=(75,0))
     else:
         portNotFound()
 
-show('home')
+def flagHandler(text, result):
+    flagger = flagCheck()
+    conn = connection()
+    server = conn.connect(12345)
+    response = flagger.check(text, server) #Maybe resolve timeout issue?
+    result['text'] = response[0]
+    result['bg'] = 'red'
+    print(f"response: {response[1]}")
+    if(int(response[1]) == 1):
+        result['bg'] = 'green2'
+        
+    result.grid=(column=0, row=2, padx=(75,0), pady=(20,0))
+    conn.disconnect(server)
+    
+show('flag')
 #bottomframe = Frame(root)
 #bottomframe.pack( side = BOTTOM )
 

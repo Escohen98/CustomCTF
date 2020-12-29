@@ -22,7 +22,9 @@ def checkCreds(c,user, password): #checks if credentials are valid and sends res
     
 def checkFlag(c,flag):
     if not flag: #Ensure server doesn't crash on forced exit
-        return(True)
+        c.sendall('Please enter a value.'.encode('utf-8'))
+        c.sendall('0'.encode('utf-8'))
+        return(False)
     if (flag == 'CTF{rendezvous_at_red_square}'):
         c.sendall('You win!'.encode('utf-8'))
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
@@ -31,6 +33,8 @@ def checkFlag(c,flag):
         c.sendall('Incorrect.'.encode('utf-8'))
         c.sendall('0'.encode('utf-8'))
         return(False)
+    c.sendall('Timeout?').encode('utf-8'))
+    c.sendall('0'.encode('utf-8'))
 
 
 def multi_threaded_client(c):
