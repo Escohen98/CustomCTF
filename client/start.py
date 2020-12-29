@@ -1,6 +1,6 @@
 from tkinter import * 
 from testConn import testConnection
-import time
+from download_client import downloader
 
 window = Tk() #Open window
 window.title('Capture the Flag')
@@ -12,6 +12,7 @@ PORT = 0
 
 #Changes global port
 def setPort(port):
+    global PORT
     PORT = port
 
 #Gets global port
@@ -66,6 +67,7 @@ def portScreen():
 def portScreenTransition(port, entries):
     if(checkPort(port)):
         setPort(port)
+        print(PORT)
         hide(entries,'menu')
     else:
         print("Invalid port message here")
@@ -85,7 +87,8 @@ def menu():
     
 def downloadScreen():
     print(getPort())
-    if(checkPort(getPort())): #Change to isConnected
+    portCheck = checkPort(getPort())
+    if(portCheck): #Change to isConnected
         var = StringVar()
         label = Label(window, textvariable=var, height=3, font=64)
         download = Button(window, text = "Download", font=32, padx = 10, pady = 10, command=lambda: hide([download, label], 'menu'))
@@ -94,6 +97,9 @@ def downloadScreen():
         download.pack(pady=100)
     else:
         portNotFound()
+    
+def toDownload():
+    downloader().download()
     
 def loginScreen():
     if(checkPort(getPort())): #Change to isConnected
