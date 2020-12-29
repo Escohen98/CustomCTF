@@ -1,9 +1,12 @@
 from tkinter import * 
+from testConn import testConnection
 import time
 
 window = Tk() #Open window
 window.title('Capture the Flag')
 window.geometry("300x300")
+window.resizable(width=False, height=False)
+connTest = testConnection()
 
 port = 0
 
@@ -11,9 +14,17 @@ def setPort(port):
     port = port
 
 def getPort():
-    return port
+    return(port)
     
-#To hide buttons
+#Checks if port is valid (through isConnect)
+def checkPort(port):
+    
+    if(connTest.testConnection(port)): #Change to isConnected(port)
+        setPort(port)
+        return(True)
+    return(False)
+    
+#To hide screens
 def hide(events, screen):
     for event in events:
         event.destroy()
@@ -32,7 +43,14 @@ def home():
 
 #Must enter port before moving to menu screen
 def portScreen():
-    print("Coming Soon")
+    lP = Label(window, text="Port:")
+    eP = Entry(window, bd = 2)
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: checkPort())
+    
+    lP.pack(side = LEFT, padx=(75,0))
+    eP.pack(side = RIGHT, padx=(0,75))
+    submit.pack(pady=(20,20))
+    #print("Coming Soon")
 
 #Menu Screen    
 def menu():
@@ -49,7 +67,7 @@ def menu():
     fB.pack(pady=10)
     
 def downloadScreen():
-    if(port == 0): #Change to isConnected
+    if(port == not 0): #Change to isConnected
         var = StringVar()
         label = Label(window, textvariable=var, font=128, padx=10, width=10)
         var.set("Port not found!")
@@ -58,7 +76,12 @@ def downloadScreen():
         label.pack(pady=(100,0))
         back.pack(pady=(100,0))
     else:
-        print('Coming Soon')
+        var = StringVar()
+        label = Label(window, textvariable=var, height=3, font=64)
+        download = Button(window, text = "Download", font=32, padx = 10, pady = 10, command=lambda: hide([download, label], 'menu'))
+        var.set("Click to download the pcap file")
+        label.pack()
+        download.pack(pady=100)
     
 def loginScreen():
     if(port == 0): #Change to isConnected
@@ -89,6 +112,8 @@ def show(screen):
     print("Screen: ", screen)
     if (screen == 'home'):
         home()
+    elif (screen == 'port'):
+        portScreen()
     elif (screen == 'menu'):
         menu()
     elif (screen == 'download'):
