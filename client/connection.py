@@ -1,4 +1,5 @@
 import socket 
+import time
 
 class connection():
     conn = False
@@ -10,14 +11,16 @@ class connection():
         server = socket.socket()
         server.settimeout(5.0)
         host = socket.gethostname() #Might not be a bad idea to put into a config file
+        print(f"host: {host} type: {type(host)}")
+        print(f"port: {port} type: {type(port)}")
         server.connect((host,port))
-        self.conn = True
-        return(s)
+        connection.conn = True
+        return(server)
             
     def disconnect(self, server):
         server.shutdown(socket.SHUT_RDWR)
         server.close()
-        print ("Closed.")
+        print("Test connection closed.")
         connection.conn = False
     
         

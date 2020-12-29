@@ -63,6 +63,7 @@ def multi_threaded_client(c):
                 if(checkFlag(c,flag)):
                     break
         else: #Should only have 3 options, but failsafe kill command
+            print(part)
             print("Invalid. Shutting Down...")
             c.close()
             break

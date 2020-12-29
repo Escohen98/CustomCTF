@@ -10,5 +10,4 @@ class testConnection():
         
         connected = conn.isConnected()
         conn.disconnect(server)
-        
         return(connected)

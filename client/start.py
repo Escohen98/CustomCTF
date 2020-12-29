@@ -8,18 +8,19 @@ window.geometry("300x300")
 window.resizable(width=False, height=False)
 connTest = testConnection()
 
-port = 0
+PORT = 0
 
+#Changes global port
 def setPort(port):
-    port = port
+    PORT = port
 
+#Gets global port
 def getPort():
-    return(port)
+    return(PORT)
     
 #Checks if port is valid 
 def checkPort(port):
     if(connTest.test(port)): 
-        setPort(port)
         return(True)
     return(False)
     
@@ -52,7 +53,7 @@ def home():
 
 #Must enter port before moving to menu screen
 def portScreen():
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: checkPort(int(eP.get())))
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenTransition(int(eP.get()),[lP, eP, submit]))
     lP = Label(window, text="Port:")
     eP = Entry(window, bd = 2)
     
@@ -61,6 +62,13 @@ def portScreen():
     eP.pack(side = RIGHT, padx=(0,75))
     #print("Coming Soon")
 
+#Too many middleman functions ... but be an easier way.
+def portScreenTransition(port, entries):
+    if(checkPort(port)):
+        setPort(port)
+        hide(entries,'menu')
+    else:
+        print("Invalid port message here")
 #Menu Screen    
 def menu():
     var = StringVar()
@@ -76,6 +84,7 @@ def menu():
     fB.pack(pady=10)
     
 def downloadScreen():
+    print(getPort())
     if(checkPort(getPort())): #Change to isConnected
         var = StringVar()
         label = Label(window, textvariable=var, height=3, font=64)
