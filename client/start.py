@@ -24,7 +24,7 @@ def checkPort(port):
     return(False)
     
 #Message when entering a screen with the incorrect port
-def portNotFound() {
+def portNotFound():
     var = StringVar()
     label = Label(window, textvariable=var, font=128, padx=10, width=10)
     var.set("Port not found!")
@@ -32,7 +32,7 @@ def portNotFound() {
     
     label.pack(pady=(100,0))
     back.pack(pady=(100,0))
-}    
+
 #To hide screens
 def hide(events, screen):
     for event in events:
