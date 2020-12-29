@@ -179,7 +179,12 @@ def flagScreen():
     else:
         portNotFound()
 
+prevCall = "" #Prevent timeouts
 def flagHandler(text, result):
+    global prevCall
+    if(not result['text'] == 'Server Times Out. Please try again' and not text == "" and prevCall == text):
+        return
+    prevCall = text
     flagger = flagCheck()
     conn = connection()
     server = conn.connect(12345)
@@ -193,7 +198,7 @@ def flagHandler(text, result):
     result.place(anchor=S, rely=0.7, relx=0.5)
     conn.disconnect(server)
     
-show('flag')
+show('home')
 #bottomframe = Frame(root)
 #bottomframe.pack( side = BOTTOM )
 

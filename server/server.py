@@ -21,25 +21,25 @@ def checkCreds(c,user, password): #checks if credentials are valid and sends res
         return(False)
     
 def checkFlag(c,flag):
+    print(f"flag: {flag}")
     if not flag: #Ensure server doesn't crash on forced exit
         c.sendall('Please enter a value.'.encode('utf-8'))
         c.sendall('0'.encode('utf-8'))
         return(False)
-    if (flag == 'CTF{rendezvous_at_red_square}'):
+    elif (flag == 'CTF{rendezvous_at_red_square}'):
         c.sendall('You win!'.encode('utf-8'))
         c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
-        return(True)
-    else: 
-        c.sendall('Incorrect.'.encode('utf-8'))
-        c.sendall('0'.encode('utf-8'))
-        return(False)
-    c.sendall('Timeout?').encode('utf-8'))
+        return(True) 
+    c.sendall('Incorrect.'.encode('utf-8'))
     c.sendall('0'.encode('utf-8'))
+    return(False)
+
 
 
 def multi_threaded_client(c):
     while True:
         part = c.recv(1234).decode() #Either send file or login. 
+        print(f"part: {part}")
         if (part == 'send'): #Part 1 - Download Files
             print(os.getcwd())
             #THIS_FOLDER = os.path.dirname(os.path.abspath(__file__)) #Cross-Platform compatibility
@@ -61,11 +61,8 @@ def multi_threaded_client(c):
                 if(checkCreds(c,user, password)): #Breaks if true
                     auth = True
         elif (part == 'flag'): #Part 3 - Enter flag
-            #Coming Soon.
-            while True:
-                flag = c.recv(1234).decode() #Receiving Flag
-                if(checkFlag(c,flag)):
-                    break
+                #flag = c.recv(1234).decode() #Receiving Flag
+                checkFlag(c,c.recv(1234).decode()) 
         else: #Should only have 3 options, but failsafe kill command
             print(part)
             print("Invalid. Shutting Down...")

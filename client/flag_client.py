@@ -26,6 +26,7 @@ class flagCheck:
             rec2 = '0'
         
         #print(rec2)
-        print(rec1)
+        print(f"rec1: {rec1}")
+        print(f"rec2: {rec2}")
         #success = (int(rec2) == 1)
         return [rec1, rec2]
