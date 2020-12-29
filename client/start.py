@@ -41,6 +41,22 @@ def hide(events, screen):
     for event in events:
         event.destroy()
     show(screen)
+    
+#Shows the given screen
+def show(screen):
+    print("Screen: ", screen)
+    if (screen == 'home'):
+        home()
+    elif (screen == 'port'):
+        portScreen()
+    elif (screen == 'menu'):
+        menu()
+    elif (screen == 'download'):
+        downloadScreen()
+    elif (screen == 'login'):
+        loginScreen()
+    elif (screen == 'flag'):
+        flagScreen()
 
 #home screen
 def home():
@@ -56,7 +72,7 @@ def home():
 #Must enter port before moving to menu screen
 def portScreen():
     submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenTransition(int(eP.get()),[lP, eP, submit]))
-    lP = Label(window, text="Port:")
+    lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
     
     submit.pack(side = BOTTOM, pady=(20,20))
@@ -91,10 +107,17 @@ def downloadScreen():
     if(checkPort(getPort())): #Change to isConnected
         var = StringVar()
         label = Label(window, textvariable=var, height=3, font=64)
-        download = Button(window, text = "Download", font=32, padx = 10, pady = 10, command=lambda: downloadHandler((download, label)))
+        
+        download = Button(window, text = "Download", font=32, padx = 10, pady = 10)
+        back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
+        events = [download, label, back]
+        download['command']=lambda: downloadHandler(events)
+        back['command']=lambda: hide(events, 'menu')
         var.set("Click to download the pcap file")
-        label.pack()
-        download.pack(pady=100)
+        
+        label.grid(column=0, row=0, padx=(50,0))
+        back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
+        download.grid(column=0, row=1, pady=(50,0), padx=(125,0))
     else:
         portNotFound()
     
@@ -104,15 +127,34 @@ def downloadHandler(events):
     server = conn.connect(getPort())
     downloader().download(server)
     conn.disconnect(server)
-    events[0]['text'] = "Back"
-    events[0]['command'] = lambda: hide([events[0], events[1]], 'menu')
     newVar = StringVar()
     events[1]['textvariable'] = newVar
+    events[1]['font']=128
     newVar.set("Done.")
+    events[0].destroy()
+    events = events[1:]
+    
+    events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
+    events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
+    
     
 def loginScreen():
     if(checkPort(getPort())): #Change to isConnected
-        print("Coming Soon")
+        login = Button(window, text = "Login", font=32, padx = 10)#, command=lambda: portScreenTransition(int(eP.get()),[lUser, eUser, lPass, ePass, login, back]))
+        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back], 'menu'))
+        lUser = Label(window, text="Username:")
+        eUser = Entry(window, bd = 2)
+        lPass = Label(window, text="Password:")
+        ePass = Entry(window, bd = 2)
+    
+        lUser.grid(column=0, row=0, padx=(50,0), pady=(100,0))
+        eUser.grid(column=1, row=0, pady=(100,0))
+        
+        lPass.grid(column=0, row=1, padx=(50,0))
+        ePass.grid(column=1, row=1)
+        
+        login.grid(column=1, row=2)
+        back.grid(column=0, row=2, padx=(50,0))
     else:
         portNotFound()
 
@@ -121,22 +163,6 @@ def flagScreen():
         print("Coming Soon")
     else:
         portNotFound()
-
-#Shows the given screen
-def show(screen):
-    print("Screen: ", screen)
-    if (screen == 'home'):
-        home()
-    elif (screen == 'port'):
-        portScreen()
-    elif (screen == 'menu'):
-        menu()
-    elif (screen == 'download'):
-        downloadScreen()
-    elif (screen == 'login'):
-        loginScreen()
-    elif (screen == 'flag'):
-        flagScreen()
 
 show('home')
 #bottomframe = Frame(root)
