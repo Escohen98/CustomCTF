@@ -16,14 +16,23 @@ def setPort(port):
 def getPort():
     return(port)
     
-#Checks if port is valid (through isConnect)
+#Checks if port is valid 
 def checkPort(port):
-    
-    if(connTest.testConnection(port)): #Change to isConnected(port)
+    if(connTest.testConnection(port)): 
         setPort(port)
         return(True)
     return(False)
     
+#Message when entering a screen with the incorrect port
+def portNotFound() {
+    var = StringVar()
+    label = Label(window, textvariable=var, font=128, padx=10, width=10)
+    var.set("Port not found!")
+    back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
+    
+    label.pack(pady=(100,0))
+    back.pack(pady=(100,0))
+}    
 #To hide screens
 def hide(events, screen):
     for event in events:
@@ -67,45 +76,27 @@ def menu():
     fB.pack(pady=10)
     
 def downloadScreen():
-    if(port == not 0): #Change to isConnected
-        var = StringVar()
-        label = Label(window, textvariable=var, font=128, padx=10, width=10)
-        var.set("Port not found!")
-        back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
-        
-        label.pack(pady=(100,0))
-        back.pack(pady=(100,0))
-    else:
+    if(checkPort(getPort())): #Change to isConnected
         var = StringVar()
         label = Label(window, textvariable=var, height=3, font=64)
         download = Button(window, text = "Download", font=32, padx = 10, pady = 10, command=lambda: hide([download, label], 'menu'))
         var.set("Click to download the pcap file")
         label.pack()
         download.pack(pady=100)
+    else:
+        portNotFound()
     
 def loginScreen():
-    if(port == 0): #Change to isConnected
-        var = StringVar()
-        label = Label(window, textvariable=var, font=128, padx=10, width=10)
-        var.set("Port not found!")
-        back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
-        
-        label.pack(pady=(100,0))
-        back.pack(pady=(100,0))
+    if(checkPort(getPort())): #Change to isConnected
+        print("Coming Soon")
     else:
-        print('Coming Soon')
+        portNotFound()
 
 def flagScreen():
-    if(port == 0): #Change to isConnected
-        var = StringVar()
-        label = Label(window, textvariable=var, font=128, padx=10, width=10)
-        var.set("Port not found!")
-        back = Button(window, text = "Back", font=32, padx=10, widt=10, command= lambda: hide([label, back], 'menu'))
-        
-        label.pack(pady=(100,0))
-        back.pack(pady=(100,0))
+    if(checkPort(getPort())): #Change to isConnected
+        print("Coming Soon")
     else:
-        print('Coming Soon')
+        portNotFound()
 
 #Shows the given screen
 def show(screen):
