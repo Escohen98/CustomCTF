@@ -190,7 +190,7 @@ def flagHandler(text, result):
     if(int(response[1]) == 1):
         result['bg'] = 'green2'
         
-    result.grid=(column=0, row=2, padx=(75,0), pady=(20,0))
+    result.place(anchor=S, rely=0.7, relx=0.5)
     conn.disconnect(server)
     
 show('flag')
