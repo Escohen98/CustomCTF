@@ -1,1 +1,0 @@
-python3 ../client/login_client.py

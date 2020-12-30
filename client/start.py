@@ -152,7 +152,7 @@ def downloadHandler(events):
     
     
 def loginScreen():
-    if(1==1 or checkPort(getPort())): 
+    if(checkPort(getPort())): 
         result = Label(window, font=128) #Result Text
         login = Button(window, text = "Login", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), result))
         back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back, result], 'menu'))
@@ -176,7 +176,7 @@ def loginScreen():
 def loginHandler(user, password, result):
     log = login()
     conn = connection()
-    server = conn.connect(12345)
+    server = conn.connect(getPort())
     response = log.check(user, password, server)
     
     if (not response[0]):
@@ -232,7 +232,7 @@ def flagHandler(text, result):
     result.place(anchor=S, rely=0.7, relx=0.5)
     conn.disconnect(server)
     
-show('login')
+show('home')
 #bottomframe = Frame(root)
 #bottomframe.pack( side = BOTTOM )
 
