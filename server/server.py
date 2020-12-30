@@ -12,7 +12,7 @@ def checkCreds(c,user, password): #checks if credentials are valid and sends res
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
     elif (user == 'spy' and password == 'pwnd'):
-        c.sendall('It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
+        c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
         c.sendall('Invalid username or password.:0'.encode('utf-8'))
@@ -51,12 +51,13 @@ def multi_threaded_client(c):
                 c.sendall(bits)
                 bits = file.read(1024)
             file.close()
+            print("Done.")
             c.shutdown(socket.SHUT_WR) #Necessary to end buffer
             break
         elif(part == 'login'): #Part 2 - Input Login Credentials
             auth = False
             #while not auth:
-            split = extraSplit.split(":") #username:password
+            split = extrasplit.split(":") #username:password
             checkCreds(c,split[0], split[1]) #Breaks if true
             break
         elif (part == 'flag'): #Part 3 - Enter flag
