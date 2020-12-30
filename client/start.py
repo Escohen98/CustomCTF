@@ -74,7 +74,7 @@ def home():
 #Must enter port before moving to menu screen
 def portScreen():
     err_msg = Label(window, font=128)
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(int(eP.get()),[lP, eP, submit, err_msg]))
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(),[lP, eP, submit, err_msg]))
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
     
@@ -84,10 +84,18 @@ def portScreen():
     #print("Coming Soon")
 
 #Too many middleman functions ... but be an easier way.
-def portScreenHandler(port, entries):
-    if(type(port) == type(1) and port <= 65535 and port >= 0 and checkPort(port)):
+def portScreenHandler(portString, entries):
+    try:
+        port = int(portString)
+    except ValueError:
+        entries[3]['text'] = "Bad Character."
+        entries[3]['bg'] = 'red'
+        entries[3].place(anchor=S, rely=0.7, relx=0.5)
+        return
+    if(type(port) == type(1) and port <= 65535 and port >= 0 and checkPort(port)): 
         setPort(port)
         print(PORT)
+        entries[3].place_forget()
         hide(entries,'menu')
     else:
         entries[3]['text'] = 'Invalid port.'
@@ -144,7 +152,7 @@ def downloadHandler(events):
     
     
 def loginScreen():
-    if(1==1 or checkPort(getPort())): #Change to isConnected
+    if(1==1 or checkPort(getPort())): 
         result = Label(window, font=128) #Result Text
         login = Button(window, text = "Login", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), result))
         back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back, result], 'menu'))

@@ -12,33 +12,32 @@ def checkCreds(c,user, password): #checks if credentials are valid and sends res
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
     elif (user == 'spy' and password == 'pwnd'):
-        c.sendall('It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}'.encode('utf-8'))
-        c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
+        c.sendall('It looks like the Spy has encrypted the message.\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
-        c.sendall('Invalid username or password.'.encode('utf-8'))
-        c.sendall('0'.encode('utf-8'))
+        c.sendall('Invalid username or password.:0'.encode('utf-8'))
         return(False)
     
 def checkFlag(c,flag):
     print(f"flag: {flag}")
     if not flag: #Ensure server doesn't crash on forced exit
-        c.sendall('Please enter a value.'.encode('utf-8'))
-        c.sendall('0'.encode('utf-8'))
+        c.sendall('Please enter a value.:0'.encode('utf-8')) 
         return(False)
     elif (flag == 'CTF{rendezvous_at_red_square}'):
-        c.sendall('You win!'.encode('utf-8'))
-        c.sendall('1'.encode('utf-8')) #Because I am too lazy to figure out how to send a boolean
+        c.sendall('You win!:1'.encode('utf-8'))
         return(True) 
-    c.sendall('Incorrect.'.encode('utf-8'))
-    c.sendall('0'.encode('utf-8'))
+    c.sendall('Incorrect.:0'.encode('utf-8'))
     return(False)
 
 
 
 def multi_threaded_client(c):
     while True:
-        part = c.recv(1234).decode() #Either send file or login. 
+        partSplit = c.recv(1234).decode().split("~") #Necessary for flag and login 
+        part = partSplit[0] #The whicever screen is in use 
+        extrasplit = '' #Prevent an unnecessary error
+        if(len(partSplit) == 2):
+            extrasplit = partSplit[1]
         print(f"part: {part}")
         if (part == 'send'): #Part 1 - Download Files
             print(os.getcwd())
@@ -56,17 +55,13 @@ def multi_threaded_client(c):
             break
         elif(part == 'login'): #Part 2 - Input Login Credentials
             auth = False
-            print("one")
             #while not auth:
-            user = c.recv(2468).decode() #Receiving Username
-            password = c.recv(2468).decode() #Receiving Password
-            print('two')
-            if(checkCreds(c,user, password)): #Breaks if true
-                auth = True
+            split = extraSplit.split(":") #username:password
+            checkCreds(c,split[0], split[1]) #Breaks if true
             break
         elif (part == 'flag'): #Part 3 - Enter flag
                 #flag = c.recv(1234).decode() #Receiving Flag
-            checkFlag(c,c.recv(1234).decode()) 
+            checkFlag(c,extraSplit) 
             break
         else: #Should only have 3 options, but failsafe kill command
             print(part)

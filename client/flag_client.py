@@ -9,7 +9,7 @@ class flagCheck:
     def check(self, flag, s): 
         #Connect to server
         try:
-            s.sendall('flag'.encode('utf-8')) 
+            s.sendall('flag~'.encode('utf-8')) 
         except socket.timeout:
             rec1 = 'Server Timed out. Please try again.'
             rec2 = '0'
@@ -18,6 +18,8 @@ class flagCheck:
         if not flag:
             print("Please enter a value: ")
             return ["Please enter a value",0]
+        elif ("~" in flag or ":" in flag):
+            return (("Bad Character.", 0))
         elif(type(flag) == type(1)): #Stops injections / timeout
             str(flag)
         s.sendall(flag.encode('utf-8'))
