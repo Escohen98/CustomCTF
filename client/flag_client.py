@@ -8,7 +8,12 @@ class flagCheck:
     #while not success: #Loops through until successful login
     def check(self, flag, s): 
         #Connect to server
-        s.sendall('flag'.encode('utf-8')) 
+        try:
+            s.sendall('flag'.encode('utf-8')) 
+        except socket.timeout:
+            rec1 = 'Server Timed out. Please try again.'
+            rec2 = '0'
+            return [rec1, rec2]
         #flag = input("Flag: ")
         if not flag:
             print("Please enter a value: ")
@@ -20,7 +25,7 @@ class flagCheck:
         #Need to resolve socket timeout issue.
         try:
             rec1 = s.recv(1024).decode('utf-8') #Response
-            rec2 = s.recv(1024).decode('utf-8') #Response Code [Deprecated]
+            rec2 = s.recv(1024).decode('utf-8') #Response Code 
         except socket.timeout:
             rec1 = 'Server Timed out. Please try again.'
             rec2 = '0'

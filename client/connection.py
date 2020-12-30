@@ -13,14 +13,17 @@ class connection():
         host = socket.gethostname() #Might not be a bad idea to put into a config file
         print(f"host: {host} type: {type(host)}")
         print(f"port: {port} type: {type(port)}")
-        server.connect((host,port))
+        try:
+            server.connect((host,port))
+        except socket.error as err:
+            return
         connection.conn = True
         return(server)
             
     def disconnect(self, server):
         server.shutdown(socket.SHUT_RDWR)
         server.close()
-        print("Test connection closed.")
+        print("Connection closed.")
         connection.conn = False
     
         

@@ -73,7 +73,8 @@ def home():
 
 #Must enter port before moving to menu screen
 def portScreen():
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(int(eP.get()),[lP, eP, submit]))
+    err_msg = Label(window, font=128)
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(int(eP.get()),[lP, eP, submit, err_msg]))
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
     
@@ -84,12 +85,14 @@ def portScreen():
 
 #Too many middleman functions ... but be an easier way.
 def portScreenHandler(port, entries):
-    if(checkPort(port)):
+    if(type(port) == type(1) and port <= 65535 and port >= 0 and checkPort(port)):
         setPort(port)
         print(PORT)
         hide(entries,'menu')
     else:
-        print("Invalid port message here")
+        entries[3]['text'] = 'Invalid port.'
+        entries[3]['bg'] = 'red'
+        entries[3].place(anchor=S, rely=0.7, relx=0.5)
 #Menu Screen    
 def menu():
     var = StringVar()
@@ -141,9 +144,11 @@ def downloadHandler(events):
     
     
 def loginScreen():
-    if(checkPort(getPort())): #Change to isConnected
-        login = Button(window, text = "Login", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), [lUser, eUser, lPass, ePass, login, back]))
-        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back], 'menu'))
+    if(1==1 or checkPort(getPort())): #Change to isConnected
+        result = Label(window, font=128) #Result Text
+        login = Button(window, text = "Login", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), result))
+        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back, result], 'menu'))
+       
         lUser = Label(window, text="Username:")
         eUser = Entry(window, bd = 2)
         lPass = Label(window, text="Password:")
@@ -160,12 +165,29 @@ def loginScreen():
     else:
         portNotFound()
 
-def loginHandler(user, password, entries):
+def loginHandler(user, password, result):
     log = login()
+    conn = connection()
+    server = conn.connect(12345)
+    response = log.check(user, password, server)
+    
+    if (not response[0]):
+        result['text'] = 'Something went wrong.' #Scapegoating
+    else:
+        result['text'] = response[0]
+    result['bg'] = 'red'
+    print(f"response: {response[1]}")
+    if(int(response[1]) == 1):
+        result['bg'] = 'systemTransparent'
+    
+    
+    result.place(anchor=S, rely=0.7, relx=0.5)
+    conn.disconnect(server)
+    
 
 
 def flagScreen():
-    if(1==1 or checkPort(getPort())): #Change to isConnected
+    if(checkPort(getPort())): #Change to isConnected
         result = Label(window, font=128) #Result Text
         submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: flagHandler(eFlag.get(),result))
         back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lFlag, eFlag, submit, back, result], 'menu'))
@@ -179,17 +201,20 @@ def flagScreen():
     else:
         portNotFound()
 
-prevCall = "" #Prevent timeouts
+#prevCall = "" #Prevent timeouts
 def flagHandler(text, result):
-    global prevCall
-    if(not result['text'] == 'Server Times Out. Please try again' and not text == "" and prevCall == text):
-        return
-    prevCall = text
+    #global prevCall
+    #if(not result['text'] == 'Server Timed out. Please try again.' and not text == "" and prevCall == text):
+    #    return
+    #prevCall = text
     flagger = flagCheck()
     conn = connection()
-    server = conn.connect(12345)
+    server = conn.connect(getPort())
     response = flagger.check(text, server) #Maybe resolve timeout issue?
-    result['text'] = response[0]
+    if (not response[0]):
+        result['text'] = 'Something went wrong.' #Scapegoating
+    else:
+        result['text'] = response[0]
     result['bg'] = 'red'
     print(f"response: {response[1]}")
     if(int(response[1]) == 1):

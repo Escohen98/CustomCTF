@@ -53,16 +53,21 @@ def multi_threaded_client(c):
                 bits = file.read(1024)
             file.close()
             c.shutdown(socket.SHUT_WR) #Necessary to end buffer
+            break
         elif(part == 'login'): #Part 2 - Input Login Credentials
             auth = False
-            while not auth:
-                user = c.recv(1234).decode() #Receiving Username
-                password = c.recv(1234).decode() #Receiving Password
-                if(checkCreds(c,user, password)): #Breaks if true
-                    auth = True
+            print("one")
+            #while not auth:
+            user = c.recv(2468).decode() #Receiving Username
+            password = c.recv(2468).decode() #Receiving Password
+            print('two')
+            if(checkCreds(c,user, password)): #Breaks if true
+                auth = True
+            break
         elif (part == 'flag'): #Part 3 - Enter flag
                 #flag = c.recv(1234).decode() #Receiving Flag
-                checkFlag(c,c.recv(1234).decode()) 
+            checkFlag(c,c.recv(1234).decode()) 
+            break
         else: #Should only have 3 options, but failsafe kill command
             print(part)
             print("Invalid. Shutting Down...")

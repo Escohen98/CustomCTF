@@ -1,0 +1,1 @@
+cd Document\Python\CustomCTF\server
