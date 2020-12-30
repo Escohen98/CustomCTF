@@ -60,8 +60,8 @@ def multi_threaded_client(c):
             checkCreds(c,split[0], split[1]) #Breaks if true
             break
         elif (part == 'flag'): #Part 3 - Enter flag
-                #flag = c.recv(1234).decode() #Receiving Flag
-            checkFlag(c,extraSplit) 
+            #flag = c.recv(1234).decode() #Receiving Flag
+            checkFlag(c,extrasplit) 
             break
         else: #Should only have 3 options, but failsafe kill command
             print(part)

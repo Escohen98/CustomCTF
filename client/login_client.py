@@ -11,14 +11,14 @@ class login():
             return(("Please enter a username and password.", 0))
         elif ("~" in user or ":" in user or "~" in password or "~" in password):
             return (("Bad Character.", 0))
-        s.sendall('login~'.encode('utf-8')) 
+        s.sendall(f'login~{user}:{password}'.encode('utf-8')) 
         
-        s.sendall(user.encode('utf-8'))
-        s.sendall(password.encode('utf-8'))
-        
-        rec1 = s.recv(1024).decode()
-        rec2 = s.recv(1024).decode()
-        return((rec1,rec2))
+       # s.sendall(user.encode('utf-8'))
+       # s.sendall(password.encode('utf-8'))
+        rec = s.recv(1024).decode().split(":")
+       # rec1 = s.recv(1024).decode()
+       # rec2 = s.recv(1024).decode()
+        return(rec)
             #print(rec2)
             #print(rec1) #Flag - Encrypted in rot-13
             #success = (int(rec2) == 1)

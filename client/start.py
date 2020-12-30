@@ -195,7 +195,7 @@ def loginHandler(user, password, result):
 
 
 def flagScreen():
-    if(checkPort(getPort())): #Change to isConnected
+    if(1==1 or checkPort(getPort())): #Change to isConnected
         result = Label(window, font=128) #Result Text
         submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: flagHandler(eFlag.get(),result))
         back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lFlag, eFlag, submit, back, result], 'menu'))
@@ -217,7 +217,7 @@ def flagHandler(text, result):
     #prevCall = text
     flagger = flagCheck()
     conn = connection()
-    server = conn.connect(getPort())
+    server = conn.connect(12345)
     response = flagger.check(text, server) #Maybe resolve timeout issue?
     if (not response[0]):
         result['text'] = 'Something went wrong.' #Scapegoating
@@ -231,7 +231,7 @@ def flagHandler(text, result):
     result.place(anchor=S, rely=0.7, relx=0.5)
     conn.disconnect(server)
     
-show('home')
+show('flag')
 #bottomframe = Frame(root)
 #bottomframe.pack( side = BOTTOM )
 
