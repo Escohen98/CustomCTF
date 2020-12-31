@@ -66,7 +66,7 @@ def multi_threaded_client(c):
             break
         else: #Should only have 3 options, but failsafe kill command
             print(part)
-            print("Invalid. Shutting Down...")
+            print("Invalid Page. Thread Shutting Down...")
             c.close()
             break
 

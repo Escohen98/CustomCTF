@@ -183,7 +183,7 @@ def loginHandler(user, password, result):
         result['text'] = 'Something went wrong.' #Scapegoating
     else:
         result['text'] = response[0]
-    result['bg'] = 'red'
+    result['bg'] = '#f0f0f0'
     print(f"response: {response[1]}")
     if(int(response[1]) == 1):
         result['bg'] = 'lightgrey'
