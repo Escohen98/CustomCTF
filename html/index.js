@@ -4,6 +4,20 @@
   window.addEventListener("load", initialize);
 
   function initialize() {
+
+        // Create WebSocket connection.
+    const socket = new WebSocket('ws://127.0.0.1:12345');
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+        socket.send('Hello Server!');
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data);
+    });
+
     $("submit-button").addEventListener("click", switchViews);
     $("start-button").addEventListener("click" , switchViews);
     $("to-download").addEventListener("click" , switchViews);
@@ -73,6 +87,21 @@
 
     $(currentView).classList.add("hidden");
     $(nextView).classList.remove("hidden");
+  }
+
+  function fetchData() {
+    if(movie == "") {
+      const display_message = document.createElement("p");
+      display_message.innerText = "Please enter an existing movie.";
+      $("output-info").appendChild(display_message);
+    } else {
+      fetch(`${URL}query='${qs("textarea").value.trim()}'&api-key=${API_KEY}`,
+        {mode : "cors"})
+        .then(checkStatus)
+        .then(JSON.parse)
+        .then(showResponse)
+        .catch(errMessage);
+    }
   }
 
   //Helper function to simplify calling a single element.
