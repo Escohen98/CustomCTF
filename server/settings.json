@@ -1,8 +1,11 @@
 {
-  "config": {
-    "port": 46825
-    "user": "spy",
-    "pass": "pwnd"
-    "file": "flag.txt"
-  }
+    "port": 46825,
+    "login": [
+      "user": "spy",
+      "pass": "pwnd"
+    ],
+    "file": [
+      "path": "./",
+      "name": "flag.txt"
+    ]
 }

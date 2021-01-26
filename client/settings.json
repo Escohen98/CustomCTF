@@ -1,0 +1,10 @@
+(
+  "window": [
+    "title": "Capture the Flag",
+    "size": "300x300"
+  ],
+  "file": [
+    "path": "./",
+    "name": "flag.txt"
+  ]
+)

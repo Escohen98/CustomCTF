@@ -20,7 +20,7 @@ def checkCreds(c,user, password): #checks if credentials are valid and sends res
     data = getJSON()
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
-    elif (user == data["user"] and password == data["pass"]):
+    elif (user == data["login"]["user"] and password == data["login"]["pass"]):
         c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
@@ -41,11 +41,12 @@ def checkFlag(c,flag):
 
 
 #Moving the buffer stream to its own file.
-def upload(c) {
+def upload(c):
+    data = getJSON() #Probably could put this in multi_thread, but lazy
     print(os.getcwd())
     #THIS_FOLDER = os.path.dirname(os.path.abspath(__file__)) #Cross-Platform compatibility
     #my_file = os.path.join(THIS_FOLDER, 'tosend.png')
-    file = open('tosend.pcap', 'rb') #Testing with png. Replace with pcap
+    file = open(data["file"]["path"]+data["file"]["name"], 'rb') #Testing with png. Replace with pcap
     print('Sending File...')
     bits = file.read(1024)
     while bits: #Sends over file in pieces
@@ -56,7 +57,6 @@ def upload(c) {
     print("Done.")
     c.shutdown(socket.SHUT_WR) #Necessary to end buffer
     break
-}
 
 def multi_threaded_client(c):
     while True:
