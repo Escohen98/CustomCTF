@@ -1,0 +1,8 @@
+{
+  "config": {
+    "port": 46825
+    "user": "spy",
+    "pass": "pwnd"
+    "file": "flag.txt"
+  }
+}
