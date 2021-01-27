@@ -3,11 +3,11 @@ import time
 
 class downloader():
     #Download Client
-    def download(self, s, data):
+    def download(self, s):
         s.sendall('send'.encode('utf-8'))
-        f = open(data["file"]["path"]+data["file"]["name"], 'wb')
+        f = open('torecv.pcap', 'wb')
         print('\nReceiving...')
-        bits = s.recv(1024)
+        bits = s.recv(1024) 
         while bits: #Importing File
             print('Receiving...')
             if not bits:
