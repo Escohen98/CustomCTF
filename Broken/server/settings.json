@@ -1,0 +1,12 @@
+{
+    "port": "12345",
+    "login": {
+      "user": "spy",
+      "passwd": "pwnd"
+    },
+    "file": {
+      "path": "./",
+      "name": "flag.txt",
+      "key": "you_got_a_key"
+    }
+}

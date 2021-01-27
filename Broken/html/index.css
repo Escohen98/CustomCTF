@@ -1,0 +1,104 @@
+button:hover {
+  color: #FF99FF;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+
+h1, h2 {
+  text-align: center;
+}
+
+.pick-challenge > p {
+  margin-top: 1em;
+  border-color: black;
+  border-radius: 1em;
+  border-style: dotted;
+  width: 30%;
+  align-content: center;
+  background-color: yellow;
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+
+#pass-label {
+  margin-left: 3px
+}
+
+#login-buttons {
+  margin-left: 3em;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5%;
+  flex-direction: column;
+}
+
+#download {
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#back-button {
+  margin-right: 5%;
+  align-self: center
+}
+
+button {
+  padding-top: 10;
+}
+
+.button > button {
+  font-size: 20px;
+  margin-top: 7%;
+  width: 10em;
+  height: 3em
+}
+
+#menu {
+  align-items: center;
+}
+
+.button {
+}
+
+.submit {
+  /*
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  */
+  padding-left: 40%
+}
+
+.vertical {
+  display: column;
+}
+
+.hidden {
+  display: none;
+}
+
+#flag-img {
+  margin-top: 1%;
+}
+
+#start-button {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
+  font-size: 25px;
+  margin-top: 7%
+
+}

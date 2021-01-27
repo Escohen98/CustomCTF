@@ -1,0 +1,303 @@
+[33mcommit c74a76cbcd59d48537da5e73f2c80b85dd1388d4[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Jan 26 11:38:50 2021 -0800
+
+    Built client-side JSON and implemented on both sides.
+
+[33mcommit ad1d17ef3c583fe0820900b1e0a6d65c6df82f90[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Jan 26 11:23:17 2021 -0800
+
+    Moved file transfer to upload function and added JSON.
+
+[33mcommit 6dfe3b716953652ca9a1bd23763f721fadc788ae[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Wed Dec 30 23:31:40 2020 -0500
+
+    Added some random things
+
+[33mcommit 4476de0de12ddbe69fd7276b43fef73e26020250[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Wed Dec 30 22:08:34 2020 -0500
+
+    Built html front-end and button transitions
+
+[33mcommit 11ffb0ed63be2b5c5740d97d47d03b1306753a27[m
+Author: Escohen98 <escohen98@gmail.com>
+Date:   Tue Dec 29 23:40:38 2020 -0500
+
+    Update README.md
+
+[33mcommit 2796f3c03fe1bb9dfe94a7973f3e0dd2e9393897[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 23:34:16 2020 -0500
+
+    Reset home screen and removed clutter.
+
+[33mcommit bb429b27108ee9b43f15fc5b8ae4689c6984b496[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 23:30:02 2020 -0500
+
+    Finished the basic functionalitygit add -A
+
+[33mcommit fcd786ca48644e20494ff241d0a11797b11b7d31[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 23:08:36 2020 -0500
+
+    Flagger worksgit add -A!
+
+[33mcommit f8ef70c6d10fb2dcaa98867864514f1f82841edf[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 20:19:45 2020 -0500
+
+    Fixed the concat problem. Added constraints to port, login, and flag. Working on the timeout.
+
+[33mcommit 823abb41eb55ed215275c84d54febcdc0b119f83[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 19:13:01 2020 -0500
+
+    Fixed the connection tester.
+
+[33mcommit 5e7fe6bbb3c8f38e7d0952ee2bfe2c04cccaba17[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 14:42:57 2020 -0500
+
+    Update
+
+[33mcommit ea5e86f6ecedfc8b53aca74e44ef77f6c81bff3e[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 14:02:44 2020 -0500
+
+    Fixed front-end. But server timing out with wrong answer.
+
+[33mcommit 2f840b96f4b51667d14db34093895719b9f133e3[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 13:54:02 2020 -0500
+
+    Debugging flag and fixing frontend
+
+[33mcommit ba0fbfefa8fbfde0cb43370c4222570298af6c6f[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Tue Dec 29 00:44:23 2020 -0500
+
+    Completed front end for download and login screens
+
+[33mcommit ae02549b3d290620dd20c7a515bd715d55c9c2ac[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 23:50:25 2020 -0500
+
+    Finish download client.
+
+[33mcommit 6d45a4ad048e2d176af7ef00306c287f7bcaf7ef[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 23:33:43 2020 -0500
+
+    Figured out the port issue when checking port
+
+[33mcommit 0c1617fbe46a181463ad796b5d75d2983d188381[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 22:56:03 2020 -0500
+
+    Port scanner works for realgit add -A!
+
+[33mcommit 922b537fc14580b30ed5f8bae635b8594dbc4404[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 22:05:00 2020 -0500
+
+    Port scanner worksgit add -Agit add -A
+
+[33mcommit 188a0eb2f0504c254410b2a4500ec259a25b32d5[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 21:33:49 2020 -0500
+
+    Fixed the issue with the submit button not showing up on the port screen.
+
+[33mcommit ed03a2e28b9079a9c7c41a46df3e16b5689a3875[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 20:43:19 2020 -0500
+
+    Moved start.py to client folder and added a shortcut.
+
+[33mcommit 21d6f9d7fb15aea3125593f66cce2196e38bef2c[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 20:38:43 2020 -0500
+
+    Added portNotFound function and moved some stuff around.
+
+[33mcommit 0672ac9705de1476bd96345455e19f4445b2e3c4[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 20:22:31 2020 -0500
+
+    added a conection test file and implemented more methods into the gui.
+
+[33mcommit 33f30c01dfc595c02e369519d52b34b277343d45[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 17:21:39 2020 -0500
+
+    Added port screen and created port not found for download screen
+
+[33mcommit 9061892aeab6e52b27a3954c9cbfb7fa0ef99156[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 17:14:49 2020 -0500
+
+    Added port not found screens to flag and login
+
+[33mcommit a98f6b8df43e8e6ef8db3a33847d0c4980bcf974[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 16:47:40 2020 -0500
+
+    Finished menu screen
+
+[33mcommit 9f16c27b66c6f54a3e747d332573fe94412c0001[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 16:26:30 2020 -0500
+
+    Added home screen, label, button, and button command
+
+[33mcommit d5b6f434e9f79211aa271d43db1bbe2f95785418[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 15:30:40 2020 -0500
+
+    Unbreaking server code.
+
+[33mcommit d26e90918ae723ce3cd34dcef9087f228b42e387[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 15:30:19 2020 -0500
+
+    Breaking breaking server to push easter egg
+
+[33mcommit a162bf2226a316e84d2741ab8339b0843a9783b4[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 15:26:11 2020 -0500
+
+    Created a connection manager class
+
+[33mcommit 7e3ad9879a4e97a0e3b64d87b8d5e0e4cbfb6d2b[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Mon Dec 28 14:27:08 2020 -0500
+
+    Adding GUI and connection class
+
+[33mcommit 2d4044da8db972a29014fc85ac97db02dd97d700[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 22:00:33 2020 -0500
+
+    Tested with pcap file
+
+[33mcommit 30dee2aafcd001bfa8a1b700239f459ac92289fc[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 21:54:58 2020 -0500
+
+    Don't know, don't care. It works.
+
+[33mcommit b590b6bffa6f7c76b9af406cc0716d6fe1d5135c[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 20:58:32 2020 -0500
+
+    Removed debug print statements
+
+[33mcommit 6fcd8587a1d83b1204334b9e350ba9d26a8663ef[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 20:57:44 2020 -0500
+
+    Successfully implemented threading
+
+[33mcommit 9fdcde070f162a61c3546d47eff83e3417fb6b2e[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 20:17:52 2020 -0500
+
+    Reverted server code
+
+[33mcommit b8a5399035179f0cf3f72446abfc9c87d190eea3[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 20:02:35 2020 -0500
+
+    Added unix run scripts
+
+[33mcommit 3c4bb41b6398aa4abfcc142f370fda7d1c53eefe[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 20:00:24 2020 -0500
+
+    Added windows run scrips
+
+[33mcommit 9bc29a833ab9d3a52e90ea8ac80a942321e76cec[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 16:33:33 2020 -0500
+
+    Added a 5 second timeout for blocked connections
+
+[33mcommit 2983337e45e6e9f022de9b6569ec0cf59947207a[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 15:39:05 2020 -0500
+
+    Fixed server crash problem.
+
+[33mcommit a0517d7bb63484dea1b9ba2412bb1c1e1a1cf76c[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 15:26:53 2020 -0500
+
+    Moving the s.sendall([part]) fixed the problemgit add -A
+
+[33mcommit 9e1694143d7f199a20afc0052dcae07d23404f22[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 15:19:06 2020 -0500
+
+    Reverted back to previous working instance. Got login_client to work as intended.
+
+[33mcommit 3f7e74fbdf654e5ab25531654c163c36046d089a[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 14:15:16 2020 -0500
+
+    Moved initial part checker out of loop. Also, random bug testing.
+
+[33mcommit 0d490523268a94e368f05b7e80c1af6b0ba8e698[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 14:02:13 2020 -0500
+
+    What a mess ...
+
+[33mcommit bd8aaec624b1d815ecac39a6f618e3f3760fa3c4[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 12:28:31 2020 -0500
+
+    Moved validation checkers from front-end to backend
+
+[33mcommit d7401653a5773e3564e11f003739a65534325099[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 12:08:06 2020 -0500
+
+    Added a data not there checker and removed file path getter commands in server.py
+
+[33mcommit 59040dd6f1b5a0473065ead5893409f9488dd866[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 02:30:41 2020 -0500
+
+    Deleted unnecessary files and renamed client.py to download_client.py
+
+[33mcommit a49c1d2160b18b010400d24105d9e2f71133fcaa[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 02:17:31 2020 -0500
+
+    Added a space to the title of the readme.
+
+[33mcommit d3cf11d563d1729fb2802e692650b591e02a028c[m
+Author: Eric C <escohen98@gmail.com>
+Date:   Sun Dec 27 02:16:45 2020 -0500
+
+    Updated the README
+
+[33mcommit 507c8df4f6d78c8f3d042a093f471a0949a9af64[m
+Author: Escohen98 <rickbox99@yahoo.com>
+Date:   Sun Dec 27 02:12:57 2020 -0500
+
+    Uploaded Server Folder
+    
+    Why didn't this upload in the original?
+
+[33mcommit 34140a465654827d6f627be64de382e7bc5e9942[m
+Author: Escohen98 <rickbox99@yahoo.com>
+Date:   Sun Dec 27 02:12:01 2020 -0500
+
+    uploading files
+    
+    What is up with master and main ...
