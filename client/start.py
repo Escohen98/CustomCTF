@@ -1,3 +1,6 @@
+import time
+import json
+
 from tkinter import *
 from testConn import testConnection
 from connection import connection
@@ -6,7 +9,7 @@ from login_client import login
 from flag_client import flagCheck
 
 window = Tk() #Open window
-with open('./settings.json') as f:
+with open("./settings.json") as f:
     data = json.load(f)
 window.title(data["window"]["title"])
 window.geometry(data["window"]["size"])
@@ -14,7 +17,7 @@ window.resizable(width=False, height=False)
 connTest = testConnection()
 
 PORT = 0
-
+KEY = ""; #In-order to authenticate download.
 #Changes global port
 def setPort(port):
     global PORT
@@ -61,6 +64,8 @@ def show(screen):
         loginScreen()
     elif (screen == 'flag'):
         flagScreen()
+    elif (screen == 'ping'):
+        pingScreen()
 
 #home screen
 def home():
@@ -108,7 +113,7 @@ def menu():
     var = StringVar()
     label = Label(window, textvariable=var, height=3, font=64)
     var.set("Pick your challenge!")
-    dB = Button(window, text = "Download", font=32, padx=10, width=10, command = lambda: hide([label, dB, lB, fB],'download'))
+    dB = Button(window, text = "Ping", font=32, padx=10, width=10, command = lambda: hide([label, dB, lB, fB],'ping'))
     lB = Button(window, text = "Login", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'login'))
     fB = Button(window, text = "Flag", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'flag'))
 
@@ -140,7 +145,7 @@ def downloadScreen():
 def downloadHandler(events):
     conn = connection()
     server = conn.connect(getPort())
-    downloader().download(server)
+    downloader().download(server, data)
     conn.disconnect(server)
     newVar = StringVar()
     events[1]['textvariable'] = newVar
@@ -190,7 +195,7 @@ def loginHandler(user, password, result):
     if(int(response[1]) == 1):
         result['bg'] = 'lightgrey'
         result['font']=("Courier", 10)
-    
+
 
     result.place(anchor=S, rely=0.85, relx=0.5)
     conn.disconnect(server)
@@ -233,6 +238,45 @@ def flagHandler(text, result):
 
     result.place(anchor=S, rely=0.7, relx=0.5)
     conn.disconnect(server)
+
+def pingScreen():
+    print(getPort())
+    if(checkPort(getPort())): #Change to isConnected
+        var = StringVar()
+        label = Label(window, textvariable=var, height=3, font=64)
+
+        ping = Button(window, text = "ping", font=32, padx = 10, pady = 10)
+        back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
+        events = [ping, label, back]
+        download['command']=lambda: pingHandler(events)
+        back['command']=lambda: hide(events, 'menu')
+        var.set("Ping Me!")
+
+        label.grid(column=0, row=0, padx=(50,0))
+        back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
+        ping.grid(column=0, row=1, pady=(50,0), padx=(125,0))
+    else:
+        portNotFound()
+
+#Downloads file then changes events on screen
+def pingHandler(events):
+    conn = connection()
+    server = conn.connect(getPort())
+    server.sendall("ping")
+    conn.disconnect(server)
+
+    timeStart = time.perf_counter()
+    newVar = StringVar()
+    events[1]['textvariable'] = newVar
+    events[1]['font']=128
+    responseCode = server.recv(1234).decode().split(";%^#&$")[0]
+    timeEnd = time.perf_counter()
+    newVar.set(f"{responseCode}\n{int((timeEnd-timeStart)*1000)/1000.0}ms")
+    events[0].destroy()
+    events = events[1:]
+
+    events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
+    events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
 
 show('home')
 #bottomframe = Frame(root)

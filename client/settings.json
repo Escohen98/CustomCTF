@@ -1,10 +1,11 @@
-(
-  "window": [
+{
+  "host": "127.0.0.1",
+  "window": {
     "title": "Capture the Flag",
     "size": "300x300"
-  ],
-  "file": [
+  },
+  "file": {
     "path": "./",
     "name": "flag.txt"
-  ]
-)
+  }
+}

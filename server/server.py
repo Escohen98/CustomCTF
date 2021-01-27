@@ -9,15 +9,13 @@ import threading
 import json
 
 #Builds JSON. Can't make global due to threads.
-def getJSON() {
-    with open('./settings.json') as f:
+def getJSON():
+    with open("./settings.json") as f:
         data = json.load(f)
     return(data)
-}
 
 s = socket.socket() #Socket object
-def checkCreds(c,user, password): #checks if credentials are valid and sends result to client
-    data = getJSON()
+def checkCreds(c, data, user, password): #checks if credentials are valid and sends result to client
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
     elif (user == data["login"]["user"] and password == data["login"]["pass"]):
@@ -41,12 +39,11 @@ def checkFlag(c,flag):
 
 
 #Moving the buffer stream to its own file.
-def upload(c):
-    data = getJSON() #Probably could put this in multi_thread, but lazy
+def upload(c, data):
     print(os.getcwd())
     #THIS_FOLDER = os.path.dirname(os.path.abspath(__file__)) #Cross-Platform compatibility
     #my_file = os.path.join(THIS_FOLDER, 'tosend.png')
-    file = open(data["file"]["path"]+data["file"]["name"], 'rb') #Testing with png. Replace with pcap
+    file = open(data.file.path+data.file.name, 'rb') #Testing with png. Replace with pcap
     print('Sending File...')
     bits = file.read(1024)
     while bits: #Sends over file in pieces
@@ -56,10 +53,10 @@ def upload(c):
     file.close()
     print("Done.")
     c.shutdown(socket.SHUT_WR) #Necessary to end buffer
-    break
 
 def multi_threaded_client(c):
     while True:
+        data = getJSON()
         partSplit = c.recv(1234).decode().split("~") #Necessary for flag and login
         part = partSplit[0] #The whicever screen is in use
         extrasplit = '' #Prevent an unnecessary error
@@ -67,16 +64,20 @@ def multi_threaded_client(c):
             extrasplit = partSplit[1]
         print(f"part: {part}")
         if (part == 'send'): #Part 1 - Download Files
-            upload(c);
+            upload(c, data);
+            break
         elif(part == 'login'): #Part 2 - Input Login Credentials
             auth = False
             #while not auth:
             split = extrasplit.split(":") #username:password
-            checkCreds(c,split[0], split[1]) #Breaks if true
+            checkCreds(c, data,split[0], split[1]) #Breaks if true
             break
         elif (part == 'flag'): #Part 3 - Enter flag
             #flag = c.recv(1234).decode() #Receiving Flag
             checkFlag(c,extrasplit)
+            break
+        elif (part == 'ping'):
+            c.sendall(f"Pong;%^#&$User:{data.login.user} Pass:{data.file.passwd}").encode("utf-8")
             break
         else: #Should only have 3 options, but failsafe kill command
             print(part)
@@ -85,7 +86,8 @@ def multi_threaded_client(c):
             break
 
 host = socket.gethostname() #Local Machine
-port = getJSON()["port"]
+port = 12345#int(getJSON()["port"])
+print(port)
 
 try:
     s.bind((host, port)) #Binding host and port to socket
