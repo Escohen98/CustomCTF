@@ -254,9 +254,9 @@ def pingScreen():
         back['command']=lambda: hide(events, 'menu')
         var.set("Ping Me!")
 
-        label.grid(column=0, row=0, padx=(50,0))
-        back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
-        ping.grid(column=0, row=1, pady=(50,0), padx=(125,0))
+        label.grid(column=0, row=0, pady=(25,0), padx=(75,0))
+        back.grid(column=0, row=1, pady=(75, 0), padx=(0,50))
+        ping.grid(column=0, row=1, pady=(75,0), padx=(175,0))
     else:
         portNotFound()
 
@@ -280,8 +280,9 @@ def pingHandler(events):
     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
     events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
 
+setPort(12345)
+show('ping')
 
-show('home')
 #bottomframe = Frame(root)
 #bottomframe.pack( side = BOTTOM )
 
