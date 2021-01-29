@@ -1,7 +1,7 @@
-# CustomCTF 
+# CustomCTF
 
-## Steps to Reproduce: 
-1. Nmap to find the port 
+## Steps to Reproduce:
+1. Nmap to find the port
 2. Use the port to access the client and download the pcap file
 3. Browse pcap file on wireshark to find login credentials
 4. Login to account
@@ -12,4 +12,7 @@
 ## Easter Egg
 1. Find server file
 2. chmod into server source code
-3. Find special code 
+3. Find special code
+
+
+Copyright © Eric Cohen 2021
