@@ -12,12 +12,16 @@ class downloader():
         f = open(filepath, 'wb')
         print('\nReceiving...')
         bits = s.recv(1024)
-        while bits: #Importing File
-            print('Receiving...')
-            if not bits:
-                break
-            f.write(bits)
-            bits = s.recv(1024)
+        try:
+            while bits: #Importing File
+                print('Receiving...')
+                if not bits:
+                    break
+                f.write(bits)
+                bits = s.recv(1024)
+            print("Done.")
+        except:
+            print("Bad.")
         f.close()
 
 # connected = False; #Checks if client is connected to server

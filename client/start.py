@@ -115,7 +115,7 @@ def menu():
     label = Label(window, textvariable=var, height=3, font=64)
     var.set("Pick your challenge!")
     dB = Button(window, text = "Ping", font=32, padx=10, width=10, command = lambda: hide([label, dB, lB, fB],'ping'))
-    lB = Button(window, text = "Login", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'login'))
+    lB = Button(window, text = "Download", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'login'))
     fB = Button(window, text = "Flag", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'flag'))
 
     label.pack()
@@ -158,11 +158,11 @@ def downloadHandler(events):
     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
     events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
 
-
+#Actually the download, but login kept by legacy 
 def loginScreen():
     if(checkPort(getPort())):
         result = Label(window, font=128) #Result Text
-        login = Button(window, text = "Login", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), result))
+        login = Button(window, text = "Download", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), result))
         back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back, result], 'menu'))
 
         lUser = Label(window, text="Username:")
@@ -194,6 +194,7 @@ def loginHandler(user, password, result):
     result['bg'] = '#f0f0f0'
     print(f"response: {response[1]}")
     if(int(response[1]) == 1):
+        downloader().download(server)
         result['bg'] = 'lightgrey'
         result['font']=("Courier", 10)
 

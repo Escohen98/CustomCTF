@@ -1,2 +1,0 @@
-It looks like the Spy has encrypted the message:
-PGS{eraqrmibhf_ng_erq_fdhner}

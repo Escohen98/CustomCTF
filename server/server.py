@@ -13,7 +13,9 @@ def checkCreds(c,user, password, data): #checks if credentials are valid and sen
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
     elif (user == data["login"]["user"] and password == data["login"]["passwd"]):
-        c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
+        c.sendall("Download Successful!:1".encode("utf-8"))
+        upload(c, data)
+        #c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
         c.sendall('Invalid username or password.:0'.encode('utf-8'))
