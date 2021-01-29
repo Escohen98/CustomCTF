@@ -158,7 +158,7 @@ def downloadHandler(events):
     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
     events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
 
-#Actually the download, but login kept by legacy 
+#Actually the download, but login kept by legacy
 def loginScreen():
     if(checkPort(getPort())):
         result = Label(window, font=128) #Result Text
@@ -273,7 +273,7 @@ def pingHandler(events):
     responseCode = server.recv(1234).decode().split(";%^#&$")[0]
     timeEnd = time.perf_counter()
     conn.disconnect(server)
-    newVar.set(f"{responseCode}\n{int((timeEnd-timeStart)*1000)/1000.0}ms")
+    newVar.set(f"{responseCode}\n{int((timeEnd-timeStart)*1000)}ms")
     events[0].destroy()
     events = events[1:]
 
