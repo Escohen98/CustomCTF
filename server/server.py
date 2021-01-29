@@ -12,7 +12,7 @@ s = socket.socket() #Socket object
 def checkCreds(c,user, password, data): #checks if credentials are valid and sends result to client
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
-    elif (user == data["login"]["user"] and password == data["login"]{"passwd"}):
+    elif (user == data["login"]["user"] and password == data["login"]["passwd"]):
         c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
@@ -61,11 +61,14 @@ def multi_threaded_client(c, data):
             auth = False
             #while not auth:
             split = extrasplit.split(":") #username:password
-            checkCreds(c,split[0], split[1]) #Breaks if true
+            checkCreds(c,split[0], split[1], data) #Breaks if true
             break
         elif (part == 'flag'): #Part 3 - Enter flag
             #flag = c.recv(1234).decode() #Receiving Flag
             checkFlag(c,extrasplit)
+            break
+        elif (part == 'ping'):
+            c.sendall(f"Pong;%^#&$User:{data['login']['user']} Pass:{data['login']['passwd']}".encode("utf-8"))
             break
         else: #Should only have 3 options, but failsafe kill command
             print(part)
