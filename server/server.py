@@ -9,10 +9,10 @@ import threading
 import json
 
 s = socket.socket() #Socket object
-def checkCreds(c,user, password): #checks if credentials are valid and sends result to client
+def checkCreds(c,user, password, data): #checks if credentials are valid and sends result to client
     if not user or not password: #Ensure server doesn't crash on forced exit
         return(True)
-    elif (user == 'spy' and password == 'pwnd'):
+    elif (user == data["login"]["user"] and password == data["login"]{"passwd"}):
         c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
     else: #Not necessary but I'm not risking it breaking again.
