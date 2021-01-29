@@ -278,10 +278,9 @@ def pingHandler(events):
     events = events[1:]
 
     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
-    events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
+    events[1].grid(column=0, row=1, padx=(110,0), pady=(75,0))
 
-setPort(12345)
-show('ping')
+show('home')
 
 #bottomframe = Frame(root)
 #bottomframe.pack( side = BOTTOM )
