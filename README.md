@@ -1,5 +1,12 @@
 # CustomCTF
 
+##Setup
++ Install Python 3.7 or greater
++ Update pip `python -m pip install --upgrade pip`
++ Install tkinter if not already installed `python -m pip install --upgrade pip`
++ Open client and server settings.config and adjust based on needs
++ Run Server and Client
+
 ## Steps to Reproduce:
 1. Nmap to find the port
 2. Use the port to access the client

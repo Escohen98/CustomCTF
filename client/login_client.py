@@ -1,5 +1,5 @@
 import socket
-#from connection import connection
+#From connection import connection
 
 #Login Client
 class login():
