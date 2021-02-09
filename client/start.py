@@ -82,9 +82,11 @@ def home():
 def portScreen():
     err_msg = Label(window, font=128)
     submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(),[lP, eP, submit, err_msg]))
+    lH = Label(window, text=data["host"])
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
 
+    lH.pack(side = TOP, pady=(20,20))
     submit.pack(side = BOTTOM, pady=(20,20))
     lP.pack(side = LEFT, padx=(75,0))
     eP.pack(side = RIGHT, padx=(0,75))
@@ -113,7 +115,7 @@ def portScreenHandler(portString, entries):
 def menu():
     var = StringVar()
     label = Label(window, textvariable=var, height=3, font=64)
-    var.set("Pick your challenge!")
+    var.set("Each challenge leads to the next!")
     dB = Button(window, text = "Ping", font=32, padx=10, width=10, command = lambda: hide([label, dB, lB, fB],'ping'))
     lB = Button(window, text = "Download", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'login'))
     fB = Button(window, text = "Flag", font=32, padx=10, width=10, command=lambda: hide([label, dB, lB, fB],'flag'))
@@ -123,40 +125,67 @@ def menu():
     lB.pack(pady=10)
     fB.pack(pady=10)
 
-def downloadScreen():
-    print(getPort())
-    if(checkPort(getPort())): #Change to isConnected
-        var = StringVar()
-        label = Label(window, textvariable=var, height=3, font=64)
+#Screen to show hints
+def hint(prevScreen):
+    var = StringVar()
+    label = Label(window, textvariable=var, height=3, font=64)
 
-        download = Button(window, text = "Download", font=32, padx = 10, pady = 10)
-        back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
-        events = [download, label, back]
-        download['command']=lambda: downloadHandler(events)
-        back['command']=lambda: hide(events, 'menu')
-        var.set("Click to download the pcap file")
+    back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
+    events = [ping, label, back]
+    ping['command']=lambda: pingHandler(events)
+    back['command']=lambda: hide(events, 'menu')
+    var.set("Ping Me!")
 
-        label.grid(column=0, row=0, padx=(50,0))
-        back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
-        download.grid(column=0, row=1, pady=(50,0), padx=(125,0))
-    else:
-        portNotFound()
+    if (screen == 'port'):
+        var = "Placeholder"
+    elif (screen == 'menu'):
+        menu()
+    elif (screen == 'download'):
+        downloadScreen()
+    elif (screen == 'login'):
+        loginScreen()
+    elif (screen == 'flag'):
+        flagScreen()
+    elif (screen == 'ping'):
+        pingScreen()
 
-#Downloads file then changes events on screen
-def downloadHandler(events):
-    conn = connection()
-    server = conn.connect(getPort())
-    downloader().download(server)
-    conn.disconnect(server)
-    newVar = StringVar()
-    events[1]['textvariable'] = newVar
-    events[1]['font']=128
-    newVar.set("Done.")
-    events[0].destroy()
-    events = events[1:]
+    label.grid(column=0, row=0, pady=(25,0), padx=(75,0))
+    back.grid(column=0, row=1, pady=(75, 0), padx=(0,50))
 
-    events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
-    events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
+# def downloadScreen():
+#     print(getPort())
+#     if(checkPort(getPort())): #Change to isConnected
+#         var = StringVar()
+#         label = Label(window, textvariable=var, height=3, font=64)
+#
+#         download = Button(window, text = "Download", font=32, padx = 10, pady = 10)
+#         back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
+#         events = [download, label, back]
+#         download['command']=lambda: downloadHandler(events)
+#         back['command']=lambda: hide(events, 'menu')
+#         var.set("Click to download the pcap file")
+#
+#         label.grid(column=0, row=0, padx=(50,0))
+#         back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
+#         download.grid(column=0, row=1, pady=(50,0), padx=(125,0))
+#     else:
+#         portNotFound()
+#
+# #Downloads file then changes events on screen
+# def downloadHandler(events):
+#     conn = connection()
+#     server = conn.connect(getPort())
+#     downloader().download(server)
+#     conn.disconnect(server)
+#     newVar = StringVar()
+#     events[1]['textvariable'] = newVar
+#     events[1]['font']=128
+#     newVar.set("Done.")
+#     events[0].destroy()
+#     events = events[1:]
+#
+#     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
+#     events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
 
 #Actually the download, but login kept by legacy
 def loginScreen():
