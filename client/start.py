@@ -52,6 +52,8 @@ def hide(events, screen):
 #Shows the given screen
 def show(screen):
     print("Screen: ", screen)
+    if (screen[0] == 'hint'):
+        hint(screen[1])
     if (screen == 'home'):
         home()
     elif (screen == 'port'):
@@ -70,26 +72,33 @@ def show(screen):
 #home screen
 def home():
     var = StringVar()
+    cprt = StringVar()
     label = Label(window, textvariable=var, height=3, font=64)
-    start = Button(window, text = "Start", font=32, padx = 10, command=lambda: hide([start, label], 'port'))
+    copyright = Label(window, textvariable=cprt, height=5, font=32)
+    start = Button(window, text = "Start", font=32, padx = 10, command=lambda: hide([copyright, start, label], 'port'))
     #start['command'] = hide([start, label])
-
+    cprt.set("© 2021 Eric Cohen")
     var.set("Welcome to the CTF!")
     label.pack()
     start.pack(pady=100)
+    copyright.place(anchor=S, rely=1.1, relx=0.5)
 
 #Must enter port before moving to menu screen
 def portScreen():
     err_msg = Label(window, font=128)
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(),[lP, eP, submit, err_msg]))
+    events = None
+    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(), events))
+    hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'port']))
     lH = Label(window, text=data["host"])
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
+    events = [hint, lH,lP, eP, submit, err_msg]
 
     lH.pack(side = TOP, pady=(20,20))
-    submit.pack(side = BOTTOM, pady=(20,20))
+    submit.pack(side = BOTTOM, pady=(20,50))
     lP.pack(side = LEFT, padx=(75,0))
     eP.pack(side = RIGHT, padx=(0,75))
+    hint.place(anchor=S, rely=.95, relx=0.5)
     #print("Coming Soon")
 
 #Too many middleman functions ... but be an easier way.
@@ -128,76 +137,45 @@ def menu():
 #Screen to show hints
 def hint(prevScreen):
     var = StringVar()
-    label = Label(window, textvariable=var, height=3, font=64)
+    label = Label(window, textvariable=var, height=3, font=64, wraplength=300, justify=CENTER)
 
-    back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
-    events = [ping, label, back]
-    ping['command']=lambda: pingHandler(events)
-    back['command']=lambda: hide(events, 'menu')
-    var.set("Ping Me!")
+    back = None
+    events = [label, back]
+    if (prevScreen == 'port'):
+        var.set("How do you find open ports for a host?")
+        back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
+    elif (prevScreen == 'login'):
+        var.set("Try pinging the server. Something might be hidden in network traffic.")
+        back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
+    elif (prevScreen == 'flag'):
+        var.set("Did you download the file? How do you decode a message?")
+        back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
+    #elif (screen == 'ping'):
+    #    var.set("How do you observe network traffic?")
+    #    back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
+    else:
+        var.set("How did you even get here?")
+        back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], 'menu'))
 
-    if (screen == 'port'):
-        var = "Placeholder"
-    elif (screen == 'menu'):
-        menu()
-    elif (screen == 'download'):
-        downloadScreen()
-    elif (screen == 'login'):
-        loginScreen()
-    elif (screen == 'flag'):
-        flagScreen()
-    elif (screen == 'ping'):
-        pingScreen()
 
-    label.grid(column=0, row=0, pady=(25,0), padx=(75,0))
-    back.grid(column=0, row=1, pady=(75, 0), padx=(0,50))
-
-# def downloadScreen():
-#     print(getPort())
-#     if(checkPort(getPort())): #Change to isConnected
-#         var = StringVar()
-#         label = Label(window, textvariable=var, height=3, font=64)
-#
-#         download = Button(window, text = "Download", font=32, padx = 10, pady = 10)
-#         back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
-#         events = [download, label, back]
-#         download['command']=lambda: downloadHandler(events)
-#         back['command']=lambda: hide(events, 'menu')
-#         var.set("Click to download the pcap file")
-#
-#         label.grid(column=0, row=0, padx=(50,0))
-#         back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
-#         download.grid(column=0, row=1, pady=(50,0), padx=(125,0))
-#     else:
-#         portNotFound()
-#
-# #Downloads file then changes events on screen
-# def downloadHandler(events):
-#     conn = connection()
-#     server = conn.connect(getPort())
-#     downloader().download(server)
-#     conn.disconnect(server)
-#     newVar = StringVar()
-#     events[1]['textvariable'] = newVar
-#     events[1]['font']=128
-#     newVar.set("Done.")
-#     events[0].destroy()
-#     events = events[1:]
-#
-#     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
-#     events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
+    label.place(anchor=N, rely=.05, relx=.5)
+    back.place(anchor=S, rely=.7, relx=.5)
 
 #Actually the download, but login kept by legacy
 def loginScreen():
     if(checkPort(getPort())):
         result = Label(window, font=128) #Result Text
+        events = None
         login = Button(window, text = "Download", font=32, padx = 10, command=lambda: loginHandler(eUser.get(), ePass.get(), result))
-        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lUser, eUser, lPass, ePass, login, back, result], 'menu'))
+        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide(events, 'menu'))
+        hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'login']))
 
         lUser = Label(window, text="Username:")
         eUser = Entry(window, bd = 2)
         lPass = Label(window, text="Password:")
         ePass = Entry(window, bd = 2)
+
+        events = [hint, lUser, eUser, lPass, ePass, login, back, result]
 
         lUser.grid(column=0, row=0, padx=(50,0), pady=(100,0))
         eUser.grid(column=1, row=0, pady=(100,0))
@@ -207,6 +185,7 @@ def loginScreen():
 
         login.grid(column=1, row=2)
         back.grid(column=0, row=2, padx=(50,0))
+        hint.place(anchor=S, rely=.95, relx=0.5)
     else:
         portNotFound()
 
@@ -308,6 +287,42 @@ def pingHandler(events):
 
     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
     events[1].grid(column=0, row=1, padx=(110,0), pady=(75,0))
+
+    # def downloadScreen():
+    #     print(getPort())
+    #     if(checkPort(getPort())): #Change to isConnected
+    #         var = StringVar()
+    #         label = Label(window, textvariable=var, height=3, font=64)
+    #
+    #         download = Button(window, text = "Download", font=32, padx = 10, pady = 10)
+    #         back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
+    #         events = [download, label, back]
+    #         download['command']=lambda: downloadHandler(events)
+    #         back['command']=lambda: hide(events, 'menu')
+    #         var.set("Click to download the pcap file")
+    #
+    #         label.grid(column=0, row=0, padx=(50,0))
+    #         back.grid(column=0, row=1, pady=(50, 0), padx=(0,75))
+    #         download.grid(column=0, row=1, pady=(50,0), padx=(125,0))
+    #     else:
+    #         portNotFound()
+    #
+    # #Downloads file then changes events on screen
+    # def downloadHandler(events):
+    #     conn = connection()
+    #     server = conn.connect(getPort())
+    #     downloader().download(server)
+    #     conn.disconnect(server)
+    #     newVar = StringVar()
+    #     events[1]['textvariable'] = newVar
+    #     events[1]['font']=128
+    #     newVar.set("Done.")
+    #     events[0].destroy()
+    #     events = events[1:]
+    #
+    #     events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
+    #     events[1].grid(column=0, row=1, padx=(110,0), pady=(125,0))
+
 
 show('home')
 
