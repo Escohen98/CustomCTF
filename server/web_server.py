@@ -1,3 +1,4 @@
+#Copyright © Eric Cohen 2021
 import http.server
 import socketserver
 

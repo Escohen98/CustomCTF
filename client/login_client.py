@@ -1,3 +1,4 @@
+#Copyright © Eric Cohen 2021
 import socket
 #From connection import connection
 

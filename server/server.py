@@ -1,3 +1,4 @@
+#Copyright © Eric Cohen 2021
 #!./server.py
 #If you're here, that means you know something
 #that hasn't been taught yet

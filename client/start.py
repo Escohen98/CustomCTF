@@ -1,3 +1,4 @@
+#Copyright © Eric Cohen 2021
 from tkinter import *
 from testConn import testConnection
 from connection import connection
