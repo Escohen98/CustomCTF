@@ -91,16 +91,17 @@ def portScreen():
     submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(), events))
     hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'port']))
     hint.place(anchor=S, rely=.95, relx=0.5)
-
+    headerTxt = Label(window, text="Connecting to:")
     lH = Text(window, height=1, width=len(data["host"]), font=("Helvetica", 10))
     lH.tag_configure("center", justify="center")
     lH.insert(1.0,data["host"])
     lH.tag_add("center", "1.0", "end")
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
-    events = [lP, eP, submit, err_msg, lH, hint]
+    events = [lP, eP, submit, err_msg, lH, hint, headerTxt]
 
-    lH.pack(side = TOP, pady=(20,20))
+    headerTxt.pack(side = TOP, pady=(5,0))
+    lH.pack(side = TOP, pady=(0,0))
     lH.configure(state="disabled")
     submit.pack(side = BOTTOM, pady=(20,70))
     lP.pack(side = LEFT, padx=(75,0))
@@ -115,7 +116,7 @@ def portScreenHandler(portString, entries):
     except ValueError:
         entries[3]['text'] = "Bad Character."
         entries[3]['bg'] = 'red'
-        entries[3].place(anchor=S, rely=0.7, relx=0.5)
+        entries[3].place(anchor=S, rely=0.6, relx=0.5)
         return
     if(type(port) == type(1) and port <= 65535 and port >= 0 and checkPort(port)):
         setPort(port)
@@ -125,7 +126,7 @@ def portScreenHandler(portString, entries):
     else:
         entries[3]['text'] = 'Invalid port.'
         entries[3]['bg'] = 'red'
-        entries[3].place(anchor=S, rely=0.7, relx=0.5)
+        entries[3].place(anchor=S, rely=0.6, relx=0.5)
 
 #Menu Screen
 def menu():
