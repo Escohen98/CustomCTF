@@ -26,14 +26,15 @@ def checkFlag(c,flag):
     print(f"flag: {flag}")
     if not flag: #Ensure server doesn't crash on forced exit
         c.sendall('Please enter a value.:0'.encode('utf-8'))
-        return(False)
+        #return(False)
     elif (flag == 'CTF{rendezvous_at_red_square}'):
         c.sendall('You win!:1'.encode('utf-8'))
-        return(True)
-    elif(flag == 'CTF{H@ppy_3@st4er!}'):
+        #return(True)
+    elif(flag == 'CTF{H@ppy_3@st3r!}'):
         c.sendall('+1 Bonus:1'.encode('utf-8'))
+		#return(True)
     c.sendall('Incorrect.:0'.encode('utf-8'))
-    return(False)
+    #return(False)
 
 def upload(c,data):
     print(os.getcwd())
