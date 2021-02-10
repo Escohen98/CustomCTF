@@ -97,7 +97,7 @@ def portScreen():
     events = [lP, eP, submit, err_msg, lH, hint]
 
     lH.pack(side = TOP, pady=(20,20))
-    submit.pack(side = BOTTOM, pady=(20,50))
+    submit.pack(side = BOTTOM, pady=(20,70))
     lP.pack(side = LEFT, padx=(75,0))
     eP.pack(side = RIGHT, padx=(0,75))
     hint.place(anchor=S, rely=.95, relx=0.5)
@@ -147,7 +147,7 @@ def hint(prevScreen):
         var.set("How do you find open ports for a host?")
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
     elif (prevScreen == 'login'):
-        var.set("Try pinging the server. Something might be hidden in network traffic.")
+        var.set("Try pinging the server. Something might be hidden in the network traffic.")
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
     elif (prevScreen == 'flag'):
         var.set("Did you download the file? How do you decode a message?")
@@ -201,7 +201,7 @@ def loginHandler(user, password, result):
         result['text'] = 'Something went wrong.' #Scapegoating
     else:
         result['text'] = response[0]
-    result['bg'] = '#f0f0f0'
+    result['bg'] = 'red'
     print(f"response: {response[1]}")
     if(int(response[1]) == 1):
         downloader().download(server)
@@ -209,7 +209,7 @@ def loginHandler(user, password, result):
         result['font']=("Courier", 10)
 
 
-    result.place(anchor=S, rely=0.85, relx=0.5)
+    result.place(anchor=S, rely=0.8, relx=0.5)
     conn.disconnect(server)
 
 
