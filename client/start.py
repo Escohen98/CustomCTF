@@ -89,6 +89,7 @@ def portScreen():
     events = None
     submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(), events))
     hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'port']))
+    hint.place(anchor=S, rely=.95, relx=0.5)
     lH = Label(window, text=data["host"])
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
@@ -214,16 +215,22 @@ def loginHandler(user, password, result):
 
 def flagScreen():
     if(checkPort(getPort())): #Change to isConnected
+        events = None
         result = Label(window, font=128) #Result Text
         submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: flagHandler(eFlag.get(),result))
-        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide([lFlag, eFlag, submit, back, result], 'menu'))
+        back = Button(window, text = "Back", font=32, padx = 10, command=lambda: hide(events, 'menu'))
+        hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'flag']))
+        hint.place(anchor=S, rely=.95, relx=0.5)
         lFlag = Label(window, text="Flag: ")
         eFlag = Entry(window, bd = 2)
+
+        events = [lFlag, eFlag, submit, back, result, hint]
 
         submit.grid(column=1, row=1, padx=(0,50), pady=(20,20))
         back.grid(column=0, row=1, padx=(50,0), pady=(20,20))
         lFlag.grid(column=0, row=0, padx=(75,0), pady=(75,0))
         eFlag.grid(column=1, row=0, padx=(0,75), pady=(75,0))
+        hint.place(anchor=S, rely=.95, relx=0.5)
     else:
         portNotFound()
 
@@ -255,13 +262,16 @@ def pingScreen():
         var = StringVar()
         label = Label(window, textvariable=var, height=3, font=64)
 
+        #hint = Button(window, text = "Hint", font=32, padx = 10))
         ping = Button(window, text = "ping", font=32, padx = 10, pady = 10)
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
         events = [ping, label, back]
         ping['command']=lambda: pingHandler(events)
         back['command']=lambda: hide(events, 'menu')
+        #hint['command']=lambda: hide(events, ['hint', 'flag']
         var.set("Ping Me!")
 
+        #hint.place(anchor=S, rely=.95, relx=0.5)
         label.grid(column=0, row=0, pady=(25,0), padx=(75,0))
         back.grid(column=0, row=1, pady=(75, 0), padx=(0,50))
         ping.grid(column=0, row=1, pady=(75,0), padx=(175,0))
