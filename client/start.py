@@ -88,10 +88,10 @@ def home():
 def portScreen():
     err_msg = Label(window, font=128)
     events = None
-    submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(), events))
+    submit = Button(window, text = "Go!", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(), events))
     hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'port']))
     hint.place(anchor=S, rely=.95, relx=0.5)
-    headerTxt = Label(window, text="Connecting to:")
+    headerTxt = Label(window, text="Connecting to")
     lH = Text(window, height=1, width=len(data["host"]), font=("Helvetica", 10))
     lH.tag_configure("center", justify="center")
     lH.insert(1.0,data["host"])
