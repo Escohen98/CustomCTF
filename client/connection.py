@@ -14,8 +14,8 @@ class connection():
             data = json.load(f)
         server = socket.socket()
         server.settimeout(5.0)
-        host = "uwischoolreifers.westus2.cloudapp.azure.com" #socket.gethostnzame()
-#socket.gethostname() #Might not be a bad idea to put into a config file
+        #host = "uwischoolreifers.westus2.cloudapp.azure.com" #Might not be a bad idea to put into a config file
+        host = socket.gethostname()
         print(f"host: {host} type: {type(host)}")
         print(f"port: {port} type: {type(port)}")
         try:

@@ -94,7 +94,7 @@ def portScreen():
     lH = Label(window, text=data["host"])
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
-    events = [hint, lH,lP, eP, submit, err_msg]
+    events = [lP, eP, submit, err_msg, lH, hint]
 
     lH.pack(side = TOP, pady=(20,20))
     submit.pack(side = BOTTOM, pady=(20,50))
@@ -177,7 +177,7 @@ def loginScreen():
         lPass = Label(window, text="Password:")
         ePass = Entry(window, bd = 2)
 
-        events = [hint, lUser, eUser, lPass, ePass, login, back, result]
+        events = [lUser, eUser, lPass, ePass, login, back, result, hint]
 
         lUser.grid(column=0, row=0, padx=(50,0), pady=(100,0))
         eUser.grid(column=1, row=0, pady=(100,0))
@@ -266,10 +266,11 @@ def pingScreen():
         #hint = Button(window, text = "Hint", font=32, padx = 10))
         ping = Button(window, text = "ping", font=32, padx = 10, pady = 10)
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
-        events = [ping, label, back]
+        events = None
         ping['command']=lambda: pingHandler(events)
         back['command']=lambda: hide(events, 'menu')
         #hint['command']=lambda: hide(events, ['hint', 'flag']
+        events = [ping, label, back]
         var.set("Ping Me!")
 
         #hint.place(anchor=S, rely=.95, relx=0.5)
