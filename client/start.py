@@ -150,7 +150,7 @@ def hint(prevScreen):
         var.set("Try pinging the server. Something might be hidden in the network traffic.")
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
     elif (prevScreen == 'flag'):
-        var.set("Did you download the file? How do you decode a message?")
+        var.set("Did you download a file? How do you decode a message?")
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
     #elif (screen == 'ping'):
     #    var.set("How do you observe network traffic?")
