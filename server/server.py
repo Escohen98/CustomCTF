@@ -29,6 +29,8 @@ def checkFlag(c,flag):
     elif (flag == 'CTF{rendezvous_at_red_square}'):
         c.sendall('You win!:1'.encode('utf-8'))
         return(True)
+    elif(flag == 'CTF{H@ppy_3@st4er!}'):
+        c.sendall('+1 Bonus:1'.encode('utf-8'))
     c.sendall('Incorrect.:0'.encode('utf-8'))
     return(False)
 

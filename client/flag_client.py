@@ -6,7 +6,7 @@ class flagCheck:
 
     #success = False;
     #while not success: #Loops through until successful login
-    def check(self, flag, s): 
+    def check(self, flag, s):
         #Connect to server
         #flag = input("Flag: ")
         if not flag:
@@ -17,10 +17,10 @@ class flagCheck:
         elif(type(flag) == type(1)): #Stops injections / timeout
             str(flag)
          #s.sendall(flag.encode('utf-8'))
-
+         #picoCTF{H@ppy_3@st3r!}
         try:
             print("here")
-            s.sendall(f'flag~{flag}'.encode('utf-8')) 
+            s.sendall(f'flag~{flag}'.encode('utf-8'))
         except socket.timeout:
             rec1 = 'Server Timed out. Please try again.'
             rec2 = '0'
@@ -31,11 +31,11 @@ class flagCheck:
             rec1 = rec[0]
             rec2 = rec[1]
            # rec1 = s.recv(1024).decode('utf-8') #Response
-           # rec2 = s.recv(1024).decode('utf-8') #Response Code 
+           # rec2 = s.recv(1024).decode('utf-8') #Response Code
         except socket.timeout:
             rec1 = 'Server Timed out. Please try again.'
             rec2 = '0'
-        
+
         #print(rec2)
         print(f"rec1: {rec1}")
         print(f"rec2: {rec2}")
