@@ -5,7 +5,7 @@
 + Update pip `python -m pip install --upgrade pip`
 + Install tkinter if not already installed `python -m pip install --upgrade pip`
 + Open client and server settings.config and adjust based on needs
-+ Run Server and Client
++ Run Server (python3 ./server/server.py) and Client (python3 ./client/start.py)
 
 ## Steps to Reproduce:
 1. Nmap to find the port
