@@ -91,12 +91,17 @@ def portScreen():
     submit = Button(window, text = "Submit", font=32, padx = 10, command=lambda: portScreenHandler(eP.get(), events))
     hint = Button(window, text = "Hint", font=32, padx = 10, command=lambda: hide(events, ['hint', 'port']))
     hint.place(anchor=S, rely=.95, relx=0.5)
-    lH = Label(window, text=data["host"])
+
+    lH = Text(window, height=1, width=len(data["host"]), font=("Helvetica", 10))
+    lH.tag_configure("center", justify="center")
+    lH.insert(1.0,data["host"])
+    lH.tag_add("center", "1.0", "end")
     lP = Label(window, text="Port: ")
     eP = Entry(window, bd = 2)
     events = [lP, eP, submit, err_msg, lH, hint]
 
     lH.pack(side = TOP, pady=(20,20))
+    lH.configure(state="disabled")
     submit.pack(side = BOTTOM, pady=(20,70))
     lP.pack(side = LEFT, padx=(75,0))
     eP.pack(side = RIGHT, padx=(0,75))
