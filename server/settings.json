@@ -1,8 +1,8 @@
 {
     "port": "25576",
     "keys": {
-      "key": "CTF{rendezvous_at_red_square}"
-      "bonus": "CTF{H@ppy_3@st4er!}",
+      "key": "CTF{rendezvous_at_red_square}",
+      "bonus": "CTF{H@ppy_3@st4er!}"
     },
     "login": {
       "user": "spy",
@@ -10,6 +10,6 @@
     },
     "file": {
       "path": "./",
-      "name": "flag.txt",
+      "name": "flag.txt"
     }
 }
