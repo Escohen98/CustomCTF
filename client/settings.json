@@ -1,11 +1,11 @@
 {
-  "host": "10.0.0.177",
+  "host": "uwischoolreifers.westus2.cloudapp.azure.com",
   "window": {
     "title": "Capture the Flag",
     "size": "300x300"
   },
   "file": {
-    "path": "./",
+    "path": "/Users/W2020iStudent/Desktop/",
     "name": "flag.txt"
   }
 }

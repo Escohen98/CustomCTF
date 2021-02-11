@@ -22,24 +22,19 @@ def checkCreds(c,user, password, data): #checks if credentials are valid and sen
         c.sendall('Invalid username or password.:0'.encode('utf-8'))
         return(False)
 
-def checkFlag(c,flag):
+def checkFlag(c,flag,data):
     print(f"flag: {flag}")
     if not flag: #Ensure server doesn't crash on forced exit
         c.sendall('Please enter a value.:0'.encode('utf-8'))
-        #return(False)
-    elif (flag == 'CTF{rendezvous_at_red_square}'):
+    elif (flag == data["keys"]["key"]):
         c.sendall('You win!:1'.encode('utf-8'))
-        #return(True)
-    elif(flag == 'CTF{H@ppy_3@st3r!}'):
+    elif(flag == data["keys"]["bonus"]):
         c.sendall('+1 Bonus:1'.encode('utf-8'))
-		#return(True)
     c.sendall('Incorrect.:0'.encode('utf-8'))
-    #return(False)
 
 def upload(c,data):
     print(os.getcwd())
     #THIS_FOLDER = os.path.dirname(os.path.abspath(__file__)) #Cross-Platform compatibility
-    #my_file = os.path.join(THIS_FOLDER, 'tosend.png')
     filepath = data["file"]["path"]+data["file"]["name"]
     file = open(filepath, 'rb') #Testing with png. Replace with pcap
     print('Sending File...')
@@ -70,8 +65,7 @@ def multi_threaded_client(c, data):
             checkCreds(c,split[0], split[1], data) #Breaks if true
             break
         elif (part == 'flag'): #Part 3 - Enter flag
-            #flag = c.recv(1234).decode() #Receiving Flag
-            checkFlag(c,extrasplit)
+            checkFlag(c,extrasplit,data)
             break
         elif (part == 'ping'):
             c.sendall(f"Pong;%^#&$User:{data['login']['user']} Pass:{data['login']['passwd']}".encode("utf-8"))
@@ -93,11 +87,8 @@ except socket.error as e:
     print(str(e))
 x = 5
 s.listen(x) #waiting for a connection can fail up to x times
-#ThreadCount = 0
 while True:
     c, addr = s.accept()
     print('Got connection from', addr)
     threading.Thread(target=multi_threaded_client, args=(c,data,  ), daemon=True).start() #Starts the new thread
-    #ThreadCount += 1
-    #print('Thread Number: ' + str(ThreadCount))
 s.close()
