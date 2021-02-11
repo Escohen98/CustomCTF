@@ -153,7 +153,7 @@ def hint(prevScreen):
         var.set("How do you find open ports for a host?")
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
     elif (prevScreen == 'login'):
-        var.set("Try \"pinging\" (tcp) the server. Something might be hidden in the network traffic.")
+        var.set("Try \"pinging\" the server. Something might be hidden in the network traffic.")
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10, command=lambda: hide([label, back], prevScreen))
     elif (prevScreen == 'flag'):
         var.set("Did you download a file? How do you decode a message?")
