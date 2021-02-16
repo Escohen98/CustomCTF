@@ -1,0 +1,14 @@
+#Put file in /lib/systemd/system/
+
+[Unit]
+Description=Service to run CTF
+After=multi-user.target
+Conflicts=getty@tty1.service #Not sure what this is, let's hope for the best.
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/someion/CustomCTF/server/server.py
+StandardInput=tty-force #Also do not know what this is
+
+[Install]
+WantedBy=multi-user.target
