@@ -1,5 +1,5 @@
 {
-    "port": "12345",
+    "port": "25567",
     "keys": {
       "key": "CTF{rendezvous_at_red_square}",
       "bonus": "CTF{H@ppy_3@st4er!}"
