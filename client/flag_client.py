@@ -18,7 +18,6 @@ class flagCheck:
             str(flag)
          #CTF{n0t_a_scr1pt_k1dd13}
         try:
-            print("here")
             s.sendall(f'flag~{flag}'.encode('utf-8'))
         except socket.timeout:
             rec1 = 'Server Timed out. Please try again.'
@@ -33,7 +32,8 @@ class flagCheck:
             rec1 = 'Server Timed out. Please try again.'
             rec2 = '0'
 
-        print(f"rec1: {rec1}")
-        print(f"rec2: {rec2}")
+        print(f"Message: {rec1}")
+        #print(f"rec1: {rec1}")
+        #print(f"rec2: {rec2}")
 
         return [rec1, rec2]
