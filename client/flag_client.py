@@ -16,7 +16,7 @@ class flagCheck:
             return (("Bad Character.", 0))
         elif(type(flag) == type(1)): #Stops injections / timeout
             str(flag)
-         #picoCTF{H@ppy_3@st3r!}
+         #CTF{n0t_a_scr1pt_k1dd13}
         try:
             print("here")
             s.sendall(f'flag~{flag}'.encode('utf-8'))
