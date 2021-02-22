@@ -201,7 +201,7 @@ def loginHandler(user, password, result):
     log = login()
     conn = connection()
     server = conn.connect(getPort())
-    response = log.check(user, password, server)
+    response = log.check(user.strip(), password.strip(), server)
 
     if (not response[0]):
         result['text'] = 'Something went wrong.' #Scapegoating
@@ -250,7 +250,7 @@ def flagHandler(text, result):
     flagger = flagCheck()
     conn = connection()
     server = conn.connect(getPort())
-    response = flagger.check(text, server) #Maybe resolve timeout issue?
+    response = flagger.check(text.strip(), server) #Maybe resolve timeout issue?
     if (not response[0]):
         result['text'] = 'Something went wrong.' #Scapegoating
     else:
