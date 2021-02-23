@@ -7,6 +7,7 @@
 import socket
 import os
 import threading
+from threading import Event
 import json
 
 s = socket.socket() #Socket object
@@ -15,6 +16,7 @@ def checkCreds(c,user, password, data): #checks if credentials are valid and sen
         return(True)
     elif (user == data["login"]["user"] and password == data["login"]["passwd"]):
         c.sendall("Download Successful!:1".encode("utf-8"))
+        Event().wait(1)
         upload(c, data)
         #c.sendall('It looks like the Spy\n has encrypted the message.\n\nPGS{eraqrmibhf_ng_erq_fdhner}:1'.encode('utf-8'))
         return(True)
