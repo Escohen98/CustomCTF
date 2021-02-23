@@ -209,10 +209,15 @@ def loginHandler(user, password, result):
         result['text'] = response[0]
     result['bg'] = 'red'
     print(f"response: {response[1]}")
-    if(int(response[1]) == 1):
-        downloader().download(server)
-        result['bg'] = 'lightgrey'
-        result['font']=("Courier", 10)
+    try: #In-case of an async buffer overflow
+        if(int(response[1]) == 1):
+            downloader().download(server)
+            result['bg'] = 'lightgrey'
+            result['font']=("Courier", 10)
+    except ValueError:
+        print("Error: Buffer Overflow")
+        result['text'] = "Something went wrong"
+        response[1] == 2
 
 
     result.place(anchor=S, rely=0.8, relx=0.5)

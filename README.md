@@ -1,4 +1,4 @@
-# CustomCTF
+# Capture the Flag for Informatics 310: Information Assurance and Cyber Security at the University of Washington
 
 ##Setup
 + Install Python 3.7 or greater
