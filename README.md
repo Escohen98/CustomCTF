@@ -18,9 +18,9 @@
 7. Enter flag
 
 ## Easter Egg
-1. Find server file
-2. chmod into server source code
-3. Find special code
+1. Find flag\_client file
+2. chmod into source code
+3. Find special flag
 4. Enter into flag
 
 ## Notes
