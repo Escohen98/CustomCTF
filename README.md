@@ -25,5 +25,6 @@
 
 ## Notes
 * Technically a user could modify source code to get credentials without monitoring the network.
+* The ping is actually a layer 2 TCP request instead of a layer 3 ICMP. The purpose is to add an unencrypted payload to the packets.
 
 Copyright © Eric Cohen 2021
