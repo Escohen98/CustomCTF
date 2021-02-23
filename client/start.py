@@ -215,7 +215,7 @@ def loginHandler(user, password, result):
             result['bg'] = 'lightgrey'
             result['font']=("Courier", 10)
     except ValueError:
-        print("Error: Buffer Overflow")
+        print("Error: Socket out of Sync")
         result['text'] = "Something went wrong"
         response[1] == 2
 
