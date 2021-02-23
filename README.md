@@ -1,9 +1,9 @@
 # Capture the Flag for Informatics 310: Information Assurance and Cyber Security at the University of Washington
 
-##Setup
+## Setup
 + Install Python 3.7 or greater
-+ Update pip `python -m pip install --upgrade pip`
-+ Install tkinter if not already installed `python -m pip install --upgrade pip`
++ Update pip `python3 -m pip install --upgrade pip`(if this errors, do `python -m pip install --upgrade pip`)
++ Install tkinter if not already installed `pip3 install tkinter`(if this errors do `pip install tkinter`)
 + Open client and server settings.config and adjust based on needs
 + Run Server (python3 ./server/server.py) and Client (python3 ./client/start.py)
 
@@ -23,7 +23,7 @@
 3. Find special code
 4. Enter into flag
 
-##Notes
+## Notes
 * Technically a user could modify source code to get credentials without monitoring the network.
 
 Copyright © Eric Cohen 2021
