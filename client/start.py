@@ -275,7 +275,7 @@ def pingScreen():
         label = Label(window, textvariable=var, height=3, font=64)
 
         #hint = Button(window, text = "Hint", font=32, padx = 10))
-        ping = Button(window, text = "ping", font=32, padx = 10, pady = 10)
+        ping = Button(window, text = "Ping", font=32, padx = 10, pady = 10)
         back = Button(window, text = "Back", font=32, padx = 10, pady = 10)
         events = None
         ping['command']=lambda: pingHandler(events)
@@ -284,10 +284,9 @@ def pingScreen():
         events = [ping, label, back]
         var.set("Ping Me!")
 
-        #hint.place(anchor=S, rely=.95, relx=0.5)
-        label.grid(column=0, row=0, pady=(25,0), padx=(75,0))
-        back.grid(column=0, row=1, pady=(75, 0), padx=(0,50))
-        ping.grid(column=0, row=1, pady=(75,0), padx=(175,0))
+        label.place(anchor=N, rely=.2, relx=.5)
+        back.place(anchor=N,rely=.6, relx=.3)
+        ping.place(anchor=N, rely=.6, relx=.7)
     else:
         portNotFound()
 
@@ -301,16 +300,16 @@ def pingHandler(events):
     newVar = StringVar()
     events[1]['textvariable'] = newVar
     events[1]['font']=128
-    responseCode = server.recv(1234).decode().split(";%^#&$")[0]
+    responseCode = server.recv(1234).decode().split(";%^#&$")[0].strip()
+    print(f"Response code: {responseCode}")
     timeEnd = time.perf_counter()
     conn.disconnect(server)
     newVar.set(f"{responseCode}\n{int((timeEnd-timeStart)*1000)}ms")
     events[0].destroy()
     events = events[1:]
 
-    events[0].grid(column=0, row=0, padx=(110,0), pady=(25,0))
-    events[1].grid(column=0, row=1, padx=(110,0), pady=(75,0))
-
+    events[0].place(anchor=N, relx=.5, rely=.2) #Label
+    events[1].place(anchor=N, relx=.5, rely=.6) #Back button
     # def downloadScreen():
     #     print(getPort())
     #     if(checkPort(getPort())): #Change to isConnected
