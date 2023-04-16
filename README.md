@@ -3,7 +3,7 @@
 ## Setup
 + Install Python 3.7 or greater
 + Update pip `python3 -m pip install --upgrade pip`(if this errors, do `python -m pip install --upgrade pip`)
-+ Install tkinter if not already installed `pip3 install tkinter`(if this errors do `pip install tkinter`)
++ Install tkinter if not already installed `pip3 install tk`(if this errors do `pip install tk`)
 + Open client and server settings.config and adjust based on needs
 + Run Server (python3 ./server/server.py) and Client (python3 ./client/start.py)
 
@@ -27,7 +27,7 @@
   
   <summary> Easter Egg </summary>
   
-    1. Find flag\_client file
+    1. Find flag_client file
     2. chmod into source code
     3. Find special flag
     4. Enter into flag
