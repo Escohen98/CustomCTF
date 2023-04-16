@@ -1,5 +1,5 @@
 {
-  "host": "uwischoolreifers.westus2.cloudapp.azure.com",
+  "host": "127.0.0.1",
   "window": {
     "title": "Capture the Flag",
     "size": "300x300"
