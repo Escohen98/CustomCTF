@@ -9,23 +9,29 @@
 
 ## Challenge:
 <details> 
+  
   <summary> Steps to Reproduce </summary> 
-1. Nmap to find the port
-2. Use the port to access the client
-3. Ping server with response that has hidden credentials.
-4. Sniff network to find unencrypted information
-5. Login to account
-6. Download encrypted message
-7. Decrypt the message
-8. Enter flag
+  
+    1. Nmap to find the port<br>
+    2. Use the port to access the client<br>
+    3. Ping server with response that has hidden credentials<br>
+    4. Sniff network to find unencrypted information<br>
+    5. Login to account<br>
+    6. Download encrypted message<br>
+    7. Decrypt the message<br>
+    8. Enter flag
+  
 </details>
   
 <details>  
+  
   <summary> Easter Egg </summary>
-1. Find flag\_client file
-2. chmod into source code
-3. Find special flag
-4. Enter into flag
+  
+    1. Find flag\_client file
+    2. chmod into source code
+    3. Find special flag
+    4. Enter into flag
+  
 </details>
 
 ## Notes
