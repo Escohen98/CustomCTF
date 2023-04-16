@@ -1,0 +1,1 @@
+python3 \Users\W2020iStudent\Documents\CTF\client\start.py
