@@ -7,7 +7,7 @@
 + Open client and server settings.config and adjust based on needs
 + Run Server (python3 ./server/server.py) and Client (python3 ./client/start.py)
 
-## Challenge:
+## Challenge
 <details> 
   
   <summary> Steps to Reproduce </summary> 
