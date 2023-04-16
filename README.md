@@ -7,21 +7,26 @@
 + Open client and server settings.config and adjust based on needs
 + Run Server (python3 ./server/server.py) and Client (python3 ./client/start.py)
 
-## Steps to Reproduce:
->! 1. Nmap to find the port
->! 2. Use the port to access the client
->! 3. Ping server with response that has hidden credentials.
->! 4. Sniff network to find unencrypted information
->! 5. Login to account
->! 6. Download encrypted message
->! 7. Decrypt the message
->! 8. Enter flag
-
-## Easter Egg
->! 1. Find flag\_client file
->! 2. chmod into source code
->! 3. Find special flag
->! 4. Enter into flag
+## Challenge:
+<details> 
+  <summary> Steps to Reproduce </summary> 
+1. Nmap to find the port
+2. Use the port to access the client
+3. Ping server with response that has hidden credentials.
+4. Sniff network to find unencrypted information
+5. Login to account
+6. Download encrypted message
+7. Decrypt the message
+8. Enter flag
+</details>
+  
+<details>  
+  <summary> Easter Egg </summary>
+1. Find flag\_client file
+2. chmod into source code
+3. Find special flag
+4. Enter into flag
+</details>
 
 ## Notes
 * Technically a user could modify source code to get credentials without monitoring the network.
